@@ -160,6 +160,245 @@ function SystemCapabilitiesCards() {
   );
 }
 
+// Industry Agent Flip Cards Component
+function IndustryAgentCards() {
+  const [flippedCards, setFlippedCards] = useState<number[]>([]);
+
+  const agents = [
+    { 
+      title: 'Coding Agents', 
+      desc: 'Technical screening and code review automation.',
+      icon: '💻',
+      image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&auto=format&fit=crop'
+    },
+    { 
+      title: 'QA Agents', 
+      desc: 'Automated testing workflows and quality assurance processes.',
+      icon: '🧪',
+      image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&auto=format&fit=crop'
+    },
+    { 
+      title: 'Sales Agents', 
+      desc: 'Lead qualification and customer outreach automation.',
+      icon: '📈',
+      image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&auto=format&fit=crop'
+    },
+    { 
+      title: 'Compliance Agents', 
+      desc: 'Regulatory tracking and documentation verification.',
+      icon: '📋',
+      image: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&auto=format&fit=crop'
+    },
+    { 
+      title: 'Customer Support Agents', 
+      desc: 'Query resolution and customer interaction handling.',
+      icon: '💬',
+      image: 'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=800&auto=format&fit=crop'
+    },
+    { 
+      title: 'Finance Workflow Agents', 
+      desc: 'Invoice processing and expense workflow automation.',
+      icon: '💰',
+      image: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800&auto=format&fit=crop'
+    }
+  ];
+
+  const toggleFlip = (index: number) => {
+    setFlippedCards(prev => 
+      prev.includes(index) 
+        ? prev.filter(i => i !== index)
+        : [...prev, index]
+    );
+  };
+
+  return (
+    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {agents.map((agent, i) => {
+        const isFlipped = flippedCards.includes(i);
+        
+        return (
+          <div
+            key={i}
+            className="relative h-[200px] cursor-pointer"
+            style={{ perspective: '1000px' }}
+            onClick={() => toggleFlip(i)}
+          >
+            <motion.div
+              className="relative w-full h-full"
+              animate={{ rotateY: isFlipped ? 180 : 0 }}
+              transition={{ duration: 0.6, type: 'spring', stiffness: 100 }}
+              style={{ transformStyle: 'preserve-3d' }}
+            >
+              {/* Front Face */}
+              <div
+                className="absolute inset-0 group p-6 rounded-xl bg-white border-2 border-gray-200 shadow-lg hover:border-cyan-400 transition-all duration-300"
+                style={{ backfaceVisibility: 'hidden' }}
+              >
+                {/* Glow effect on hover */}
+                <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/0 to-emerald-400/0 group-hover:from-cyan-400/10 group-hover:to-emerald-400/10 rounded-xl transition-all duration-300" />
+                
+                <div className="relative h-full flex flex-col">
+                  <div className="text-4xl mb-4">{agent.icon}</div>
+                  <h3 className="font-semibold text-xl text-gray-900 mb-3">
+                    {agent.title}
+                  </h3>
+                  <p className="text-gray-700 leading-relaxed text-sm">
+                    {agent.desc}
+                  </p>
+                </div>
+              </div>
+
+              {/* Back Face */}
+              <div
+                className="absolute inset-0 p-6 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-600 shadow-lg overflow-hidden"
+                style={{ 
+                  backfaceVisibility: 'hidden',
+                  transform: 'rotateY(180deg)'
+                }}
+              >
+                <div className="relative h-full flex flex-col">
+                  <img 
+                    src={agent.image} 
+                    alt={agent.title}
+                    className="absolute inset-0 w-full h-full object-cover opacity-30 rounded-xl"
+                  />
+                  <div className="relative z-10 h-full flex flex-col items-center justify-center text-center text-white">
+                    <div className="text-5xl mb-3">{agent.icon}</div>
+                    <h3 className="font-bold text-xl mb-2">
+                      {agent.title}
+                    </h3>
+                    <p className="text-xs font-light">
+                      Industry-optimized AI agents
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+// Workflow Pipeline Flip Cards Component
+function WorkflowPipelineCards() {
+  const [flippedCards, setFlippedCards] = useState<number[]>([]);
+
+  const steps = [
+    { 
+      title: 'AI Resume Screening', 
+      desc: 'Automated filtering and candidate matching.',
+      icon: '📄',
+      image: 'https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=800&auto=format&fit=crop'
+    },
+    { 
+      title: 'AI Interview Agents', 
+      desc: 'Conversational technical assessments.',
+      icon: '🤖',
+      image: 'https://images.unsplash.com/photo-1531746790731-6c087fecd65a?w=800&auto=format&fit=crop'
+    },
+    { 
+      title: 'Smart Ranking Engine', 
+      desc: 'Performance-based scoring system.',
+      icon: '📊',
+      image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&auto=format&fit=crop'
+    },
+    { 
+      title: 'Certified Human Interviewers', 
+      desc: 'Expert validation of top candidates.',
+      icon: '👤',
+      image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&auto=format&fit=crop'
+    },
+    { 
+      title: 'Optimized Hiring Decision', 
+      desc: 'Data-driven selection workflow.',
+      icon: '🎯',
+      image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&auto=format&fit=crop'
+    }
+  ];
+
+  const toggleFlip = (index: number) => {
+    setFlippedCards(prev => 
+      prev.includes(index) 
+        ? prev.filter(i => i !== index)
+        : [...prev, index]
+    );
+  };
+
+  return (
+    <div className="flex flex-col md:flex-row items-center justify-between gap-6 md:gap-4 relative">
+      {/* Connecting lines - hidden on mobile */}
+      <div className="hidden md:block absolute top-16 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-500/30 via-cyan-500/50 to-emerald-500/30" />
+      
+      {steps.map((step, i) => {
+        const isFlipped = flippedCards.includes(i);
+        
+        return (
+          <div
+            key={i}
+            className="relative flex-1 w-full md:w-auto h-[220px] cursor-pointer"
+            style={{ perspective: '1000px' }}
+            onClick={() => toggleFlip(i)}
+          >
+            <motion.div
+              className="relative w-full h-full"
+              animate={{ rotateY: isFlipped ? 180 : 0 }}
+              transition={{ duration: 0.6, type: 'spring', stiffness: 100 }}
+              style={{ transformStyle: 'preserve-3d' }}
+            >
+              {/* Front Face */}
+              <div
+                className="absolute inset-0 group bg-white border-2 border-gray-200 rounded-xl p-6 shadow-lg hover:border-cyan-400 transition-all duration-300"
+                style={{ backfaceVisibility: 'hidden' }}
+              >
+                {/* Glow effect on hover */}
+                <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/0 to-emerald-400/0 group-hover:from-cyan-400/10 group-hover:to-emerald-400/10 rounded-xl transition-all duration-300" />
+                
+                <div className="relative flex flex-col items-center text-center h-full">
+                  <div className="text-4xl mb-3 text-gray-900">{step.icon}</div>
+                  <h3 className="font-bold text-lg text-gray-900 mb-2">
+                    {step.title}
+                  </h3>
+                  <p className="text-sm text-gray-700 leading-relaxed">
+                    {step.desc}
+                  </p>
+                </div>
+              </div>
+
+              {/* Back Face */}
+              <div
+                className="absolute inset-0 p-6 rounded-xl bg-gradient-to-br from-orange-500 to-red-500 shadow-lg overflow-hidden"
+                style={{ 
+                  backfaceVisibility: 'hidden',
+                  transform: 'rotateY(180deg)'
+                }}
+              >
+                <div className="relative h-full flex flex-col">
+                  <img 
+                    src={step.image} 
+                    alt={step.title}
+                    className="absolute inset-0 w-full h-full object-cover opacity-30 rounded-xl"
+                  />
+                  <div className="relative z-10 h-full flex flex-col items-center justify-center text-center text-white">
+                    <div className="text-5xl mb-3">{step.icon}</div>
+                    <h3 className="font-bold text-xl mb-2">
+                      {step.title}
+                    </h3>
+                    <p className="text-xs font-light">
+                      Step {i + 1} of 5
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 export default function Home() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const heroRef = useRef(null);
@@ -402,59 +641,7 @@ export default function Home() {
           
           {/* Workflow Pipeline */}
           <div className="mb-20">
-            <div className="flex flex-col md:flex-row items-center justify-between gap-6 md:gap-4 relative">
-              {/* Connecting lines - hidden on mobile */}
-              <div className="hidden md:block absolute top-16 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-500/30 via-cyan-500/50 to-emerald-500/30" />
-              
-              {[
-                { 
-                  title: 'AI Resume Screening', 
-                  desc: 'Automated filtering and candidate matching.',
-                  icon: '📄'
-                },
-                { 
-                  title: 'AI Interview Agents', 
-                  desc: 'Conversational technical assessments.',
-                  icon: '🤖'
-                },
-                { 
-                  title: 'Smart Ranking Engine', 
-                  desc: 'Performance-based scoring system.',
-                  icon: '📊'
-                },
-                { 
-                  title: 'Certified Human Interviewers', 
-                  desc: 'Expert validation of top candidates.',
-                  icon: '👤'
-                },
-                { 
-                  title: 'Optimized Hiring Decision', 
-                  desc: 'Data-driven selection workflow.',
-                  icon: '🎯'
-                }
-              ].map((step, i) => (
-                <div
-                  key={i}
-                  className="group relative flex-1 w-full md:w-auto"
-                >
-                  {/* Card */}
-                  <div className="relative bg-white border-2 border-gray-200 rounded-xl p-6 shadow-lg hover:-translate-y-2 hover:border-cyan-400 transition-all duration-300">
-                    {/* Glow effect on hover */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/0 to-emerald-400/0 group-hover:from-cyan-400/10 group-hover:to-emerald-400/10 rounded-xl transition-all duration-300" />
-                    
-                    <div className="relative flex flex-col items-center text-center">
-                      <div className="text-4xl mb-3 text-gray-900">{step.icon}</div>
-                      <h3 className="font-bold text-lg text-gray-900 mb-2">
-                        {step.title}
-                      </h3>
-                      <p className="text-sm text-gray-700 leading-relaxed">
-                        {step.desc}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
+            <WorkflowPipelineCards />
           </div>
           
           {/* System Capabilities */}
@@ -488,58 +675,7 @@ export default function Home() {
           </div>
           
           {/* Agent Cards Grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              { 
-                title: 'Coding Agents', 
-                desc: 'Technical screening and code review automation.',
-                icon: '💻'
-              },
-              { 
-                title: 'QA Agents', 
-                desc: 'Automated testing workflows and quality assurance processes.',
-                icon: '🧪'
-              },
-              { 
-                title: 'Sales Agents', 
-                desc: 'Lead qualification and customer outreach automation.',
-                icon: '📈'
-              },
-              { 
-                title: 'Compliance Agents', 
-                desc: 'Regulatory tracking and documentation verification.',
-                icon: '📋'
-              },
-              { 
-                title: 'Customer Support Agents', 
-                desc: 'Query resolution and customer interaction handling.',
-                icon: '💬'
-              },
-              { 
-                title: 'Finance Workflow Agents', 
-                desc: 'Invoice processing and expense workflow automation.',
-                icon: '💰'
-              }
-            ].map((agent, i) => (
-              <div
-                key={i}
-                className="group relative p-6 rounded-xl bg-white border-2 border-gray-200 shadow-lg hover:-translate-y-2 hover:border-cyan-400 transition-all duration-300"
-              >
-                {/* Glow effect on hover */}
-                <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/0 to-emerald-400/0 group-hover:from-cyan-400/10 group-hover:to-emerald-400/10 rounded-xl transition-all duration-300" />
-                
-                <div className="relative">
-                  <div className="text-4xl mb-4">{agent.icon}</div>
-                  <h3 className="font-semibold text-xl text-gray-900 mb-3">
-                    {agent.title}
-                  </h3>
-                  <p className="text-gray-700 leading-relaxed text-sm">
-                    {agent.desc}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
+          <IndustryAgentCards />
         </div>
       </section>
 
