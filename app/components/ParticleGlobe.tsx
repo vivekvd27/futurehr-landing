@@ -201,7 +201,7 @@ function EnergyParticles() {
           Math.sin(phi) * Math.sin(theta) * speed,
           Math.cos(phi) * speed
         ),
-        size: 0.02 + Math.random() * 0.08,
+        size: 0.04 + Math.random() * 0.12,
         color: Math.random() > 0.85 ? (Math.random() > 0.5 ? '#06b6d4' : '#84cc16') : '#ffffff',
         initialDelay: Math.random() * 2
       });
