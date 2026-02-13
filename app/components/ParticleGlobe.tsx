@@ -128,7 +128,7 @@ function HoneycombGlobe({ exploded, onExplode }: { exploded: boolean; onExplode:
           position={circle.position} 
           rotation={circle.rotation}
         >
-          <torusGeometry args={[circle.radius, 0.025, 12, 32]} />
+          <sphereGeometry args={[0.12, 16, 16]} />
           <meshStandardMaterial 
             color={hovered ? "#22d3ee" : "#06b6d4"} 
             emissive={hovered ? "#22d3ee" : "#06b6d4"}
@@ -137,7 +137,6 @@ function HoneycombGlobe({ exploded, onExplode }: { exploded: boolean; onExplode:
             roughness={0.1}
             transparent
             opacity={1}
-            side={THREE.DoubleSide}
           />
         </mesh>
       ))}
