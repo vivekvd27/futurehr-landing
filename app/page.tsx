@@ -1,7 +1,17 @@
 'use client';
 
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 import { useRef, useState } from 'react';
+import dynamic from 'next/dynamic';
+
+const ParticleGlobe = dynamic(() => import('./components/ParticleGlobe'), { 
+  ssr: false,
+  loading: () => (
+    <div className="w-full h-full flex items-center justify-center">
+      <div className="w-16 h-16 border-4 border-cyan-500 border-t-transparent rounded-full animate-spin" />
+    </div>
+  )
+});
 
 // Animation variants
 const fadeInUp = {
@@ -49,6 +59,15 @@ function AnimatedSection({ children, className = '' }: { children: React.ReactNo
 
 export default function Home() {
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const heroRef = useRef(null);
+  
+  // Parallax effect for network graphic
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start end", "end start"]
+  });
+  
+  const networkY = useTransform(scrollYProgress, [0, 1], [50, -50]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -74,23 +93,26 @@ export default function Home() {
   return (
     <main className="h-screen overflow-y-scroll snap-y snap-mandatory">
 
-      {/* SECTION 1 – BRAND INTRO - Pure White with Bold Typography */}
-      <section className="h-screen flex items-center justify-center bg-white snap-start px-6">
+      {/* SECTION 1 – BRAND INTRO - Deep Navy with Gradient */}
+      <section className="h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-slate-800 to-blue-950 snap-start px-6 relative overflow-hidden">
+        {/* Subtle Glow Effect */}
+        <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 via-transparent to-emerald-500/5 pointer-events-none" />
+        
         <motion.div 
-          className="flex items-center gap-8"
+          className="flex items-center gap-8 relative z-10"
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8 }}
         >
           <motion.div 
-            className="w-1 h-32 bg-gradient-to-b from-blue-700 via-cyan-500 to-emerald-500 rounded-full"
+            className="w-1 h-32 bg-gradient-to-b from-cyan-400 via-cyan-500 to-emerald-400 rounded-full shadow-lg shadow-cyan-500/30"
             initial={{ height: 0 }}
             animate={{ height: 128 }}
             transition={{ duration: 0.8, delay: 0.3 }}
           />
           <div>
             <motion.h1 
-              className="text-7xl md:text-9xl font-black tracking-tight bg-gradient-to-r from-blue-700 via-cyan-500 to-emerald-500 bg-clip-text text-transparent"
+              className="text-7xl md:text-9xl font-black tracking-tight bg-gradient-to-r from-cyan-400 via-cyan-300 to-emerald-400 bg-clip-text text-transparent"
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.5 }}
@@ -98,7 +120,7 @@ export default function Home() {
               FutureHR
             </motion.h1>
             <motion.p 
-              className="text-xl md:text-2xl text-gray-500 font-light tracking-wide mt-2"
+              className="text-xl md:text-2xl text-slate-400 font-light tracking-wide mt-2"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.7 }}
@@ -109,52 +131,129 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* SECTION 2 – HERO with Animated Gradient Background */}
-      <section className="h-screen flex flex-col justify-center items-center text-center snap-start px-6 relative overflow-hidden">
-        {/* Animated Gradient Background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-cyan-50 to-emerald-50">
+      {/* SECTION 2 – WORKFORCE INFRASTRUCTURE */}
+      <section ref={heroRef} className="h-screen flex items-center snap-start px-6 md:px-16 relative overflow-hidden bg-[#05070F]">
+        {/* Subtle Background Accent */}
+        <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 via-transparent to-emerald-500/5 pointer-events-none" />
+        
+        {/* Animated Sci-Fi Grid Background */}
+        <div 
+          className="absolute inset-0 pointer-events-none opacity-40"
+          style={{
+            backgroundImage: `
+              linear-gradient(to right, rgba(6, 182, 212, 0.1) 1px, transparent 1px),
+              linear-gradient(to bottom, rgba(6, 182, 212, 0.1) 1px, transparent 1px)
+            `,
+            backgroundSize: '80px 80px',
+            animation: 'gridDrift 40s linear infinite',
+          }}
+        />
+        
+        {/* Grid Glow Points */}
+        <div 
+          className="absolute inset-0 pointer-events-none opacity-30"
+          style={{
+            backgroundImage: `
+              radial-gradient(circle at 0 0, rgba(6, 182, 212, 0.2) 2px, transparent 2px)
+            `,
+            backgroundSize: '80px 80px',
+            animation: 'gridDrift 40s linear infinite',
+          }}
+        />
+        
+        <div className="max-w-7xl mx-auto w-full grid md:grid-cols-2 gap-8 md:gap-16 items-center relative z-10">
+          
+          {/* Left Column - Content */}
           <motion.div
-            className="absolute inset-0 bg-gradient-to-tr from-blue-100/50 via-cyan-100/50 to-emerald-100/50"
-            animate={{
-              backgroundPosition: ['0% 0%', '100% 100%', '0% 0%'],
-            }}
-            transition={{
-              duration: 15,
-              repeat: Infinity,
-              ease: 'linear'
-            }}
-            style={{ backgroundSize: '200% 200%' }}
-          />
-        </div>
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            {/* Badge */}
+            <motion.div
+              className="inline-flex items-center gap-2 px-4 py-2 mb-6 rounded-full border border-cyan-500/40 bg-cyan-500/10 backdrop-blur-sm"
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              <span className="text-xl">⚡</span>
+              <span className="text-sm font-semibold text-cyan-400">
+                The Future is Now
+              </span>
+            </motion.div>
 
-        <motion.div 
-          className="relative z-10 max-w-5xl"
-          initial="hidden"
-          animate="visible"
-          variants={staggerContainer}
-        >
-          <motion.h2 
-            className="text-5xl md:text-7xl font-black mb-8 bg-gradient-to-r from-blue-700 via-cyan-500 to-emerald-500 bg-clip-text text-transparent leading-tight"
-            variants={fadeInUp}
+            {/* Headline */}
+            <h2 className="text-4xl md:text-6xl font-normal mb-6 text-white leading-tight">
+              Do You Know the Future of HR is Here?
+            </h2>
+
+            {/* Subtext */}
+            <p className="text-lg md:text-xl text-slate-300 mb-8 leading-relaxed font-light">
+              Combine AI agents and certified human experts into scalable workforce systems. 
+              Automate repetitive workflows, augment human decision-making, and deploy capability on demand.
+            </p>
+
+            {/* Capability Highlights */}
+            <div className="flex gap-8 mb-8">
+              {[
+                { metric: '90%', label: 'Time Saved' },
+                { metric: '24/7', label: 'Availability' },
+                { metric: '100%', label: 'Human-Aligned' }
+              ].map((item, i) => (
+                <motion.div
+                  key={i}
+                  className="flex flex-col"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.4 + i * 0.1 }}
+                >
+                  <span className="text-4xl font-bold bg-gradient-to-r from-cyan-400 to-emerald-400 bg-clip-text text-transparent mb-1">
+                    {item.metric}
+                  </span>
+                  <span className="text-slate-500 text-sm font-medium">{item.label}</span>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* CTA Button */}
+            <motion.a
+              href="#waitlist"
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-cyan-500 to-emerald-500 text-slate-900 px-8 py-4 rounded-full font-bold text-lg shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40 transition-all"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.7 }}
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              Access Infrastructure Beta
+              <span>→</span>
+            </motion.a>
+          </motion.div>
+
+          {/* Right Column - Particle Globe Graphic */}
+          <motion.div 
+            className="relative h-[300px] md:h-[500px] flex items-center justify-center"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
           >
-            Hire Intelligence. Deploy Capability.
-          </motion.h2>
-          <motion.p 
-            className="text-xl md:text-2xl text-gray-700 max-w-3xl mx-auto mb-12 leading-relaxed font-light"
-            variants={fadeInUp}
-          >
-            Build your workforce with human talent and AI agents. One unified platform.
-          </motion.p>
-          <motion.a
-            href="#waitlist"
-            className="inline-block bg-gradient-to-r from-blue-700 to-emerald-500 text-white px-10 py-5 rounded-full font-semibold text-lg shadow-lg shadow-blue-200 hover:shadow-xl hover:shadow-blue-300"
-            variants={fadeInUp}
-            whileHover={{ scale: 1.05, y: -2 }}
-            whileTap={{ scale: 0.98 }}
-          >
-            Request Access
-          </motion.a>
-        </motion.div>
+            {/* Gentle Float Container */}
+            <motion.div
+              className="relative w-full max-w-[280px] md:max-w-[400px] aspect-square"
+              animate={{
+                y: [0, -15, 0],
+              }}
+              transition={{
+                duration: 6,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            >
+              <ParticleGlobe />
+            </motion.div>
+          </motion.div>
+
+        </div>
       </section>
 
       {/* SECTION 3 – PROBLEM */}
@@ -341,7 +440,69 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* SECTION 6 – VISION */}
+      {/* SECTION 6 – FROM TOOLS TO INFRASTRUCTURE */}
+      <section className="h-screen flex flex-col justify-center items-center snap-start px-6 bg-white relative">
+        <motion.div 
+          className="max-w-7xl w-full grid md:grid-cols-2 gap-16 items-center"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={staggerContainer}
+        >
+          {/* Left Side - Text Content */}
+          <motion.div variants={fadeInUp}>
+            <h2 className="text-4xl md:text-5xl font-black mb-8 bg-gradient-to-r from-blue-700 via-cyan-500 to-emerald-500 bg-clip-text text-transparent leading-tight">
+              From Hiring Tools to Workforce Infrastructure.
+            </h2>
+            
+            <div className="space-y-6 text-gray-700 text-lg leading-relaxed">
+              <div>
+                <h3 className="font-bold text-xl text-gray-900 mb-2">Traditional HR Tools</h3>
+                <p className="font-light">
+                  Built for specific tasks. Hiring, onboarding, and performance systems operate in silos. 
+                  Limited scalability. Manual workflows.
+                </p>
+              </div>
+              
+              <div>
+                <h3 className="font-bold text-xl text-gray-900 mb-2">Workforce Infrastructure</h3>
+                <p className="font-light">
+                  A modular platform where AI agents, human experts, and intelligence systems 
+                  work as unified capability layers. Built to scale with your organization.
+                </p>
+              </div>
+            </div>
+          </motion.div>
+          
+          {/* Right Side - Visual Blocks */}
+          <motion.div 
+            className="grid grid-cols-2 gap-4"
+            variants={staggerContainer}
+          >
+            {[
+              { label: 'AI Agents', color: 'from-cyan-500 to-cyan-600' },
+              { label: 'Human Experts', color: 'from-emerald-500 to-emerald-600' },
+              { label: 'Intelligence APIs', color: 'from-blue-600 to-cyan-500' },
+              { label: 'Workflow Modules', color: 'from-emerald-600 to-blue-600' }
+            ].map((block, i) => (
+              <motion.div
+                key={i}
+                className={`relative h-32 rounded-2xl bg-gradient-to-br ${block.color} p-6 flex items-end shadow-lg`}
+                variants={fadeInUp}
+                whileHover={{ scale: 1.05, y: -5 }}
+                transition={{ duration: 0.3 }}
+              >
+                <div className="absolute inset-0 bg-white/10 rounded-2xl backdrop-blur-sm" />
+                <span className="relative z-10 text-white font-semibold text-sm">
+                  {block.label}
+                </span>
+              </motion.div>
+            ))}
+          </motion.div>
+        </motion.div>
+      </section>
+
+      {/* SECTION 7 – VISION */}
       <section className="h-screen flex flex-col justify-center items-center snap-start px-6 relative overflow-hidden">
         {/* Subtle gradient background */}
         <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-cyan-50 to-emerald-50" />
@@ -388,7 +549,7 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* SECTION 7 – WAITLIST */}
+      {/* SECTION 8 – WAITLIST */}
       <section
         id="waitlist"
         className="h-screen flex flex-col justify-center items-center snap-start px-6 relative overflow-hidden"
