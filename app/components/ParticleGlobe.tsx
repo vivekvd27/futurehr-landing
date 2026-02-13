@@ -130,21 +130,11 @@ function HoneycombGlobe({ exploded, onExplode }: { exploded: boolean; onExplode:
             <meshStandardMaterial 
               color={hovered ? "#a0ee22" : "#06b6d4"} 
               emissive={hovered ? "#eee022" : "#06b6d4"}
-              emissiveIntensity={hovered ? 0.8 : 0.5}
-              metalness={0.9}
-              roughness={0.1}
+              emissiveIntensity={hovered ? 1.2 : 0.7}
+              metalness={0.7}
+              roughness={0.2}
               transparent
               opacity={1}
-            />
-          </mesh>
-          {/* Black wireframe border */}
-          <mesh>
-            <sphereGeometry args={[0.23, 6, 6]} />
-            <meshBasicMaterial 
-              color="#000000"
-              wireframe={true}
-              transparent
-              opacity={0.6}
             />
           </mesh>
         </group>
@@ -270,12 +260,15 @@ export default function ParticleGlobe() {
       gl={{ antialias: true, alpha: true }}
     >
       {/* Enhanced lighting for 3D effect */}
-      <ambientLight intensity={0.4} />
-      <pointLight position={[5, 5, 5]} intensity={1.5} color="#06b6d4" />
-      <pointLight position={[-5, -5, -5]} intensity={0.8} color="#10b981" />
+      <ambientLight intensity={0.6} />
+      <pointLight position={[5, 5, 5]} intensity={2} color="#06b6d4" />
+      <pointLight position={[-5, -5, -5]} intensity={1.2} color="#10b981" />
+      <pointLight position={[0, 0, 8]} intensity={1.5} color="#ffffff" />
+      <directionalLight position={[3, 3, 3]} intensity={1.5} color="#ffffff" />
+      <directionalLight position={[-3, -3, -3]} intensity={0.8} color="#06b6d4" />
       <spotLight 
         position={[0, 10, 0]} 
-        intensity={1} 
+        intensity={1.5} 
         angle={0.6} 
         penumbra={1} 
         color="#ffffff"
