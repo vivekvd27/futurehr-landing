@@ -79,7 +79,7 @@ function SystemCapabilitiesCards() {
       title: 'Learning Engine', 
       desc: 'Continuously learns from your organization\'s unique patterns and preferences. Gets smarter with every interaction, tailored to your culture.',
       icon: '🧠',
-      image: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&auto=format&fit=crop'
+      image: 'https://images.unsplash.com/photo-1655393001768-d946c97d6fd1?w=800&auto=format&fit=crop'
     }
   ];
 
