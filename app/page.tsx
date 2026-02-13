@@ -103,7 +103,7 @@ export default function Home() {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.7 }}
             >
-              Enterprise Hiring Intelligence
+              Intelligent Workforce Infrastructure
             </motion.p>
           </div>
         </motion.div>
@@ -137,13 +137,13 @@ export default function Home() {
             className="text-5xl md:text-7xl font-black mb-8 bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-600 bg-clip-text text-transparent leading-tight"
             variants={fadeInUp}
           >
-            The Future of Recruitment is Autonomous
+            Hire Intelligence. Deploy Capability.
           </motion.h2>
           <motion.p 
             className="text-xl md:text-2xl text-gray-700 max-w-3xl mx-auto mb-12 leading-relaxed font-light"
             variants={fadeInUp}
           >
-            AI-driven. Human-validated. Enterprise-ready hiring automation.
+            Build your workforce with human talent and AI agents. One unified platform.
           </motion.p>
           <motion.a
             href="#waitlist"
@@ -152,7 +152,7 @@ export default function Home() {
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.98 }}
           >
-            Join the Enterprise Waitlist
+            Request Access
           </motion.a>
         </motion.div>
       </section>
@@ -170,7 +170,7 @@ export default function Home() {
             className="text-5xl md:text-6xl font-black text-center mb-16 bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent"
             variants={fadeInUp}
           >
-            Recruitment is Broken
+            HR Operations Are Bottlenecked
           </motion.h2>
           <motion.div 
             className="space-y-6"
@@ -178,9 +178,10 @@ export default function Home() {
           >
             {[
               { icon: '⏳', text: 'Hiring cycles take 45–60 days', stat: '45-60 days' },
-              { icon: '💸', text: 'High screening & interview costs', stat: '$4K+ per hire' },
-              { icon: '⚖️', text: 'Bias & inconsistent evaluation', stat: '70% subjective' },
-              { icon: '📉', text: 'Poor candidate experience', stat: '60% drop-off' }
+              { icon: '🔁', text: 'Manual repetitive HR workflows', stat: '70% manual' },
+              { icon: '🚧', text: 'Slow scaling of HR teams', stat: '3-6 months' },
+              { icon: '👥', text: 'High dependency on human bandwidth', stat: 'Limited capacity' },
+              { icon: '📊', text: 'Lack of structured intelligence infrastructure', stat: 'Siloed data' }
             ].map((item, i) => (
               <motion.div
                 key={i}
@@ -264,7 +265,130 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* SECTION 5 – WAITLIST */}
+      {/* SECTION 5 – BEYOND INTERVIEWS */}
+      <section className="h-screen flex flex-col justify-center items-center snap-start px-6 relative overflow-hidden bg-white">
+        <motion.div 
+          className="max-w-7xl w-full"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={staggerContainer}
+        >
+          <motion.h2 
+            className="text-5xl md:text-6xl font-black text-center mb-6 bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-600 bg-clip-text text-transparent"
+            variants={fadeInUp}
+          >
+            Beyond Interviews
+          </motion.h2>
+          <motion.p 
+            className="text-2xl md:text-3xl text-center mb-20 font-light text-gray-600"
+            variants={fadeInUp}
+          >
+            Hire People. Deploy Agents. Scale Intelligence.
+          </motion.p>
+          
+          <motion.div 
+            className="grid md:grid-cols-3 gap-8"
+            variants={staggerContainer}
+          >
+            {[
+              { 
+                title: 'AI Interview Agents', 
+                desc: 'Automated structured evaluation across technical and behavioral dimensions.',
+                gradient: 'from-blue-500/10 to-cyan-500/10',
+                icon: '🤖',
+                badge: null
+              },
+              { 
+                title: 'Certified Human Interviewers', 
+                desc: 'On-demand domain experts for critical hiring decisions.',
+                gradient: 'from-purple-500/10 to-pink-500/10',
+                icon: '👤',
+                badge: null
+              },
+              { 
+                title: 'Industry-Specific AI HR Agents', 
+                desc: 'Vertical AI assistants designed to support repetitive HR workflows across industries such as tech, BPO, healthcare, and manufacturing.',
+                gradient: 'from-cyan-500/10 to-blue-500/10',
+                icon: '🏭',
+                badge: 'Roadmap'
+              }
+            ].map((card, i) => (
+              <motion.div
+                key={i}
+                className={`relative p-8 rounded-3xl bg-gradient-to-br ${card.gradient} backdrop-blur-xl border border-gray-100 shadow-lg`}
+                variants={fadeInUp}
+                whileHover={cardHover}
+              >
+                {/* Glass effect overlay */}
+                <div className="absolute inset-0 rounded-3xl bg-white/60 backdrop-blur-md" />
+                
+                <div className="relative z-10">
+                  {card.badge && (
+                    <div className="inline-block px-3 py-1 mb-4 text-xs font-bold uppercase tracking-wider rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-white">
+                      {card.badge}
+                    </div>
+                  )}
+                  <div className="text-5xl mb-6">{card.icon}</div>
+                  <h3 className="font-bold text-2xl mb-4 bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">
+                    {card.title}
+                  </h3>
+                  <p className="text-gray-700 leading-relaxed">{card.desc}</p>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </motion.div>
+      </section>
+
+      {/* SECTION 6 – VISION */}
+      <section className="h-screen flex flex-col justify-center items-center snap-start px-6 relative overflow-hidden">
+        {/* Subtle gradient background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-purple-50" />
+        
+        <motion.div 
+          className="relative z-10 max-w-5xl text-center"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={staggerContainer}
+        >
+          <motion.h2 
+            className="text-5xl md:text-7xl font-black mb-12 leading-tight"
+            variants={fadeInUp}
+          >
+            <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-600 bg-clip-text text-transparent">
+              The Hybrid Workforce Era
+            </span>
+            <br />
+            <span className="text-gray-900">Has Begun.</span>
+          </motion.h2>
+          
+          <motion.div 
+            className="space-y-6 text-2xl md:text-3xl font-light text-gray-700 leading-relaxed max-w-4xl mx-auto"
+            variants={fadeInUp}
+          >
+            <p>
+              Enterprises will increasingly hire both humans and AI agents.
+            </p>
+            <p className="text-gray-900 font-normal">
+              FutureHR is building the infrastructure to enable that transition.
+            </p>
+          </motion.div>
+
+          <motion.div 
+            className="mt-16 pt-16 border-t border-gray-200 max-w-3xl mx-auto"
+            variants={fadeInUp}
+          >
+            <p className="text-lg md:text-xl text-gray-600 leading-relaxed">
+              FutureHR is built as a modular workforce infrastructure platform. 
+              Enterprises can activate AI agents, human experts, and intelligence modules as needed.
+            </p>
+          </motion.div>
+        </motion.div>
+      </section>
+
+      {/* SECTION 7 – WAITLIST */}
       <section
         id="waitlist"
         className="h-screen flex flex-col justify-center items-center snap-start px-6 relative overflow-hidden"
@@ -285,13 +409,13 @@ export default function Home() {
               className="text-4xl md:text-5xl font-black text-center mb-4 text-white"
               variants={fadeInUp}
             >
-              Join the Private Enterprise Beta
+              Join the Workforce Infrastructure Beta
             </motion.h2>
             <motion.p 
               className="text-center text-white/80 mb-12 text-lg"
               variants={fadeInUp}
             >
-              Limited spots available for forward-thinking enterprises
+              Be among the first to deploy hybrid human + AI workforce systems
             </motion.p>
 
             <motion.form
