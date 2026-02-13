@@ -83,14 +83,14 @@ export default function Home() {
           transition={{ duration: 0.8 }}
         >
           <motion.div 
-            className="w-1 h-32 bg-gradient-to-b from-blue-500 via-purple-500 to-cyan-500 rounded-full"
+            className="w-1 h-32 bg-gradient-to-b from-blue-700 via-cyan-500 to-emerald-500 rounded-full"
             initial={{ height: 0 }}
             animate={{ height: 128 }}
             transition={{ duration: 0.8, delay: 0.3 }}
           />
           <div>
             <motion.h1 
-              className="text-7xl md:text-9xl font-black tracking-tight bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-600 bg-clip-text text-transparent"
+              className="text-7xl md:text-9xl font-black tracking-tight bg-gradient-to-r from-blue-700 via-cyan-500 to-emerald-500 bg-clip-text text-transparent"
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.5 }}
@@ -112,9 +112,9 @@ export default function Home() {
       {/* SECTION 2 – HERO with Animated Gradient Background */}
       <section className="h-screen flex flex-col justify-center items-center text-center snap-start px-6 relative overflow-hidden">
         {/* Animated Gradient Background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-purple-50 to-cyan-50">
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-cyan-50 to-emerald-50">
           <motion.div
-            className="absolute inset-0 bg-gradient-to-tr from-blue-100/50 via-purple-100/50 to-cyan-100/50"
+            className="absolute inset-0 bg-gradient-to-tr from-blue-100/50 via-cyan-100/50 to-emerald-100/50"
             animate={{
               backgroundPosition: ['0% 0%', '100% 100%', '0% 0%'],
             }}
@@ -134,7 +134,7 @@ export default function Home() {
           variants={staggerContainer}
         >
           <motion.h2 
-            className="text-5xl md:text-7xl font-black mb-8 bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-600 bg-clip-text text-transparent leading-tight"
+            className="text-5xl md:text-7xl font-black mb-8 bg-gradient-to-r from-blue-700 via-cyan-500 to-emerald-500 bg-clip-text text-transparent leading-tight"
             variants={fadeInUp}
           >
             Hire Intelligence. Deploy Capability.
@@ -147,7 +147,7 @@ export default function Home() {
           </motion.p>
           <motion.a
             href="#waitlist"
-            className="inline-block bg-gradient-to-r from-blue-600 to-purple-600 text-white px-10 py-5 rounded-full font-semibold text-lg shadow-lg shadow-blue-200 hover:shadow-xl hover:shadow-blue-300"
+            className="inline-block bg-gradient-to-r from-blue-700 to-emerald-500 text-white px-10 py-5 rounded-full font-semibold text-lg shadow-lg shadow-blue-200 hover:shadow-xl hover:shadow-blue-300"
             variants={fadeInUp}
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.98 }}
@@ -203,7 +203,7 @@ export default function Home() {
       {/* SECTION 4 – SOLUTION with Glassmorphism Cards */}
       <section className="h-screen flex flex-col justify-center items-center snap-start px-6 relative overflow-hidden">
         {/* Subtle gradient background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-purple-50" />
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-cyan-50 to-emerald-50" />
         
         <motion.div 
           className="relative z-10 max-w-7xl w-full"
@@ -213,7 +213,7 @@ export default function Home() {
           variants={staggerContainer}
         >
           <motion.h2 
-            className="text-5xl md:text-6xl font-black text-center mb-20 bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-600 bg-clip-text text-transparent"
+            className="text-5xl md:text-6xl font-black text-center mb-20 bg-gradient-to-r from-blue-700 via-cyan-500 to-emerald-500 bg-clip-text text-transparent"
             variants={fadeInUp}
           >
             Autonomous Hiring Infrastructure
@@ -233,7 +233,7 @@ export default function Home() {
               { 
                 title: 'Human Validation', 
                 desc: 'Certified interviewers validate top candidates for final excellence.',
-                gradient: 'from-purple-500/10 to-pink-500/10',
+                gradient: 'from-cyan-500/10 to-emerald-500/10',
                 icon: '✓'
               },
               { 
@@ -275,7 +275,7 @@ export default function Home() {
           variants={staggerContainer}
         >
           <motion.h2 
-            className="text-5xl md:text-6xl font-black text-center mb-6 bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-600 bg-clip-text text-transparent"
+            className="text-5xl md:text-6xl font-black text-center mb-6 bg-gradient-to-r from-blue-700 via-cyan-500 to-emerald-500 bg-clip-text text-transparent"
             variants={fadeInUp}
           >
             Beyond Interviews
@@ -302,7 +302,7 @@ export default function Home() {
               { 
                 title: 'Certified Human Interviewers', 
                 desc: 'On-demand domain experts for critical hiring decisions.',
-                gradient: 'from-purple-500/10 to-pink-500/10',
+                gradient: 'from-cyan-500/10 to-emerald-500/10',
                 icon: '👤',
                 badge: null
               },
@@ -325,7 +325,7 @@ export default function Home() {
                 
                 <div className="relative z-10">
                   {card.badge && (
-                    <div className="inline-block px-3 py-1 mb-4 text-xs font-bold uppercase tracking-wider rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-white">
+                    <div className="inline-block px-3 py-1 mb-4 text-xs font-bold uppercase tracking-wider rounded-full bg-gradient-to-r from-blue-700 to-emerald-500 text-white">
                       {card.badge}
                     </div>
                   )}
@@ -344,7 +344,7 @@ export default function Home() {
       {/* SECTION 6 – VISION */}
       <section className="h-screen flex flex-col justify-center items-center snap-start px-6 relative overflow-hidden">
         {/* Subtle gradient background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-purple-50" />
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-cyan-50 to-emerald-50" />
         
         <motion.div 
           className="relative z-10 max-w-5xl text-center"
@@ -357,7 +357,7 @@ export default function Home() {
             className="text-5xl md:text-7xl font-black mb-12 leading-tight"
             variants={fadeInUp}
           >
-            <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-600 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-blue-700 via-cyan-500 to-emerald-500 bg-clip-text text-transparent">
               The Hybrid Workforce Era
             </span>
             <br />
@@ -394,7 +394,7 @@ export default function Home() {
         className="h-screen flex flex-col justify-center items-center snap-start px-6 relative overflow-hidden"
       >
         {/* Gradient Background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-600 via-purple-600 to-cyan-500" />
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-700 via-cyan-500 to-emerald-500" />
         <div className="absolute inset-0 bg-black/10" />
 
         {!isSubmitted ? (
@@ -509,7 +509,7 @@ export default function Home() {
 
               {/* Success Message */}
               <motion.h2
-                className="text-4xl md:text-5xl font-black mb-6 bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-600 bg-clip-text text-transparent leading-tight"
+                className="text-4xl md:text-5xl font-black mb-6 bg-gradient-to-r from-blue-700 via-cyan-500 to-emerald-500 bg-clip-text text-transparent leading-tight"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
@@ -527,7 +527,7 @@ export default function Home() {
               </motion.p>
 
               <motion.p
-                className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-600 bg-clip-text text-transparent"
+                className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-blue-700 via-cyan-500 to-emerald-500 bg-clip-text text-transparent"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.6 }}
