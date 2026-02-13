@@ -9,6 +9,7 @@ function HoneycombGlobe({ exploded, onExplode }: { exploded: boolean; onExplode:
   const globeRef = useRef<THREE.Group>(null);
   const [hovered, setHovered] = useState(false);
   const { camera } = useThree();
+  const timeRef = useRef(0);
   
   // Create honeycomb pattern with circles
   const circleData = useMemo(() => {
@@ -114,6 +115,30 @@ function HoneycombGlobe({ exploded, onExplode }: { exploded: boolean; onExplode:
   const handleClick = () => {
     onExplode();
   };
+
+  // Animate glow effect
+  useFrame((state) => {
+    timeRef.current = state.clock.elapsedTime;
+    
+    if (globeRef.current) {
+      globeRef.current.children.forEach((group, i) => {
+        const mesh = group.children[0] as THREE.Mesh;
+        if (mesh && mesh.material) {
+          const material = mesh.material as THREE.MeshStandardMaterial;
+          
+          // Create a wave pattern based on sphere index and time
+          const wave = Math.sin(timeRef.current * 1.5 + i * 0.3) * 0.5 + 0.5;
+          const pulse = Math.sin(timeRef.current * 2 + i * 0.15);
+          
+          // Combine wave and pulse for varied effect
+          const intensity = wave * 0.4 + pulse * 0.3 + 0.3;
+          
+          // Update emissive intensity with animation continuing during hover
+          material.emissiveIntensity = hovered ? intensity + 0.5 : intensity;
+        }
+      });
+    }
+  });
   
   return (
     <group 
@@ -130,7 +155,7 @@ function HoneycombGlobe({ exploded, onExplode }: { exploded: boolean; onExplode:
             <meshStandardMaterial 
               color={hovered ? "#a0ee22" : "#06b6d4"} 
               emissive={hovered ? "#eee022" : "#06b6d4"}
-              emissiveIntensity={hovered ? 1.2 : 0.7}
+              emissiveIntensity={0.7}
               metalness={0.7}
               roughness={0.2}
               transparent
