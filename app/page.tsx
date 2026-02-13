@@ -1,5 +1,6 @@
 'use client';
 
+import React from 'react';
 import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 import { useRef, useState } from 'react';
 import dynamic from 'next/dynamic';
@@ -329,26 +330,24 @@ function WorkflowPipelineCards() {
   };
 
   return (
-    <div className="flex flex-col md:flex-row items-center justify-between gap-6 md:gap-4 relative">
-      {/* Connecting lines - hidden on mobile */}
-      <div className="hidden md:block absolute top-16 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-500/30 via-cyan-500/50 to-emerald-500/30" />
+    <div className="flex flex-col md:flex-row items-center gap-2 md:gap-3 relative">
       
       {steps.map((step, i) => {
         const isFlipped = flippedCards.includes(i);
         
         return (
-          <div
-            key={i}
-            className="relative flex-1 w-full md:w-auto h-[220px] cursor-pointer"
-            style={{ perspective: '1000px' }}
-            onClick={() => toggleFlip(i)}
-          >
-            <motion.div
-              className="relative w-full h-full"
-              animate={{ rotateY: isFlipped ? 180 : 0 }}
-              transition={{ duration: 0.6, type: 'spring', stiffness: 100 }}
-              style={{ transformStyle: 'preserve-3d' }}
+          <React.Fragment key={i}>
+            <div
+              className="relative flex-1 w-full md:w-auto h-[220px] cursor-pointer"
+              style={{ perspective: '1000px' }}
+              onClick={() => toggleFlip(i)}
             >
+              <motion.div
+                className="relative w-full h-full"
+                animate={{ rotateY: isFlipped ? 180 : 0 }}
+                transition={{ duration: 0.6, type: 'spring', stiffness: 100 }}
+                style={{ transformStyle: 'preserve-3d' }}
+              >
               {/* Front Face */}
               <div
                 className="absolute inset-0 group bg-white border-2 border-gray-200 rounded-xl p-6 shadow-lg hover:border-cyan-400 transition-all duration-300"
@@ -396,6 +395,22 @@ function WorkflowPipelineCards() {
               </div>
             </motion.div>
           </div>
+          
+          {/* Arrow between steps - hidden on mobile, not shown after last step */}
+          {i < steps.length - 1 && (
+            <div className="hidden md:flex items-center justify-center text-cyan-500">
+              <svg 
+                className="w-8 h-8" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2.5" 
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </div>
+          )}
+          </React.Fragment>
         );
       })}
     </div>
