@@ -327,14 +327,14 @@ export default function Home() {
               ].map((step, i) => (
                 <div
                   key={i}
-                  className="relative flex-1 w-full md:w-auto hover:scale-105 transition-transform duration-200"
+                  className="group relative flex-1 w-full md:w-auto"
                 >
-                  {/* Glow effect */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/20 to-emerald-400/20 rounded-xl blur-xl" />
-                  
                   {/* Card */}
-                  <div className="relative bg-white border-2 border-gray-200 rounded-xl p-6 shadow-xl">
-                    <div className="flex flex-col items-center text-center">
+                  <div className="relative bg-white border-2 border-gray-200 rounded-xl p-6 shadow-lg hover:-translate-y-2 hover:border-cyan-400 transition-all duration-300">
+                    {/* Glow effect on hover */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/0 to-emerald-400/0 group-hover:from-cyan-400/10 group-hover:to-emerald-400/10 rounded-xl transition-all duration-300" />
+                    
+                    <div className="relative flex flex-col items-center text-center">
                       <div className="text-4xl mb-3 text-gray-900">{step.icon}</div>
                       <h3 className="font-bold text-lg text-gray-900 mb-2">
                         {step.title}
@@ -375,15 +375,20 @@ export default function Home() {
               ].map((capability, i) => (
                 <div
                   key={i}
-                  className="relative p-6 rounded-xl bg-gray-50 border-2 border-gray-200 hover:border-cyan-400 transition-colors duration-200"
+                  className="group relative p-6 rounded-xl bg-white border-2 border-gray-200 shadow-lg hover:-translate-y-2 hover:border-cyan-400 transition-all duration-300"
                 >
-                  <div className="text-4xl mb-4">{capability.icon}</div>
-                  <h4 className="font-bold text-xl text-gray-900 mb-3">
-                    {capability.title}
-                  </h4>
-                  <p className="text-gray-700 leading-relaxed">
-                    {capability.desc}
-                  </p>
+                  {/* Glow effect on hover */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/0 to-emerald-400/0 group-hover:from-cyan-400/10 group-hover:to-emerald-400/10 rounded-xl transition-all duration-300" />
+                  
+                  <div className="relative">
+                    <div className="text-4xl mb-4">{capability.icon}</div>
+                    <h4 className="font-bold text-xl text-gray-900 mb-3">
+                      {capability.title}
+                    </h4>
+                    <p className="text-gray-700 leading-relaxed">
+                      {capability.desc}
+                    </p>
+                  </div>
                 </div>
               ))}
             </div>
