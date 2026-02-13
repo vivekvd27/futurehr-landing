@@ -57,6 +57,109 @@ function AnimatedSection({ children, className = '' }: { children: React.ReactNo
   );
 }
 
+// System Capabilities Flip Cards Component
+function SystemCapabilitiesCards() {
+  const [flippedCards, setFlippedCards] = useState<number[]>([]);
+
+  const capabilities = [
+    { 
+      title: 'Smart Automation', 
+      desc: 'Automate resume screening, interview scheduling, and candidate communications. Let AI handle the repetitive while you focus on the strategic.',
+      icon: '⚡',
+      image: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&auto=format&fit=crop'
+    },
+    { 
+      title: 'Instant Processing', 
+      desc: 'Process thousands of applications in seconds. Generate insights in real-time. Make data-driven decisions faster than ever before.',
+      icon: '⚙️',
+      image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&auto=format&fit=crop'
+    },
+    { 
+      title: 'Learning Engine', 
+      desc: 'Continuously learns from your organization\'s unique patterns and preferences. Gets smarter with every interaction, tailored to your culture.',
+      icon: '🧠',
+      image: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&auto=format&fit=crop'
+    }
+  ];
+
+  const toggleFlip = (index: number) => {
+    setFlippedCards(prev => 
+      prev.includes(index) 
+        ? prev.filter(i => i !== index)
+        : [...prev, index]
+    );
+  };
+
+  return (
+    <div className="grid md:grid-cols-3 gap-6">
+      {capabilities.map((capability, i) => {
+        const isFlipped = flippedCards.includes(i);
+        
+        return (
+          <div
+            key={i}
+            className="relative h-[280px] cursor-pointer"
+            style={{ perspective: '1000px' }}
+            onClick={() => toggleFlip(i)}
+          >
+            <motion.div
+              className="relative w-full h-full"
+              animate={{ rotateY: isFlipped ? 180 : 0 }}
+              transition={{ duration: 0.6, type: 'spring', stiffness: 100 }}
+              style={{ transformStyle: 'preserve-3d' }}
+            >
+              {/* Front Face */}
+              <div
+                className="absolute inset-0 group p-6 rounded-xl bg-white border-2 border-gray-200 shadow-lg hover:border-cyan-400 transition-all duration-300"
+                style={{ backfaceVisibility: 'hidden' }}
+              >
+                {/* Glow effect on hover */}
+                <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/0 to-emerald-400/0 group-hover:from-cyan-400/10 group-hover:to-emerald-400/10 rounded-xl transition-all duration-300" />
+                
+                <div className="relative h-full flex flex-col">
+                  <div className="text-4xl mb-4">{capability.icon}</div>
+                  <h4 className="font-bold text-xl text-gray-900 mb-3">
+                    {capability.title}
+                  </h4>
+                  <p className="text-gray-700 leading-relaxed text-sm">
+                    {capability.desc}
+                  </p>
+                </div>
+              </div>
+
+              {/* Back Face */}
+              <div
+                className="absolute inset-0 p-6 rounded-xl bg-gradient-to-br from-cyan-500 to-emerald-500 shadow-lg overflow-hidden"
+                style={{ 
+                  backfaceVisibility: 'hidden',
+                  transform: 'rotateY(180deg)'
+                }}
+              >
+                <div className="relative h-full flex flex-col">
+                  <img 
+                    src={capability.image} 
+                    alt={capability.title}
+                    className="absolute inset-0 w-full h-full object-cover opacity-40 rounded-xl"
+                  />
+                  <div className="relative z-10 h-full flex flex-col items-center justify-center text-center text-white">
+                    <div className="text-6xl mb-4">{capability.icon}</div>
+                    <h4 className="font-bold text-2xl mb-3">
+                      {capability.title}
+                    </h4>
+                    <p className="text-sm font-light">
+                      Powered by advanced AI algorithms
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 export default function Home() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const heroRef = useRef(null);
@@ -360,43 +463,7 @@ export default function Home() {
               System Capabilities
             </h3>
             
-            <div className="grid md:grid-cols-3 gap-6">
-              {[
-                { 
-                  title: 'Smart Automation', 
-                  desc: 'Automate resume screening, interview scheduling, and candidate communications. Let AI handle the repetitive while you focus on the strategic.',
-                  icon: '⚡'
-                },
-                { 
-                  title: 'Instant Processing', 
-                  desc: 'Process thousands of applications in seconds. Generate insights in real-time. Make data-driven decisions faster than ever before.',
-                  icon: '⚙️'
-                },
-                { 
-                  title: 'Learning Engine', 
-                  desc: 'Continuously learns from your organization\'s unique patterns and preferences. Gets smarter with every interaction, tailored to your culture.',
-                  icon: '🧠'
-                }
-              ].map((capability, i) => (
-                <div
-                  key={i}
-                  className="group relative p-6 rounded-xl bg-white border-2 border-gray-200 shadow-lg hover:-translate-y-2 hover:border-cyan-400 transition-all duration-300"
-                >
-                  {/* Glow effect on hover */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/0 to-emerald-400/0 group-hover:from-cyan-400/10 group-hover:to-emerald-400/10 rounded-xl transition-all duration-300" />
-                  
-                  <div className="relative">
-                    <div className="text-4xl mb-4">{capability.icon}</div>
-                    <h4 className="font-bold text-xl text-gray-900 mb-3">
-                      {capability.title}
-                    </h4>
-                    <p className="text-gray-700 leading-relaxed">
-                      {capability.desc}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
+            <SystemCapabilitiesCards />
           </div>
         </div>
       </section>
