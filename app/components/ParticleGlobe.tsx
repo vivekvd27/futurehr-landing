@@ -123,22 +123,31 @@ function HoneycombGlobe({ exploded, onExplode }: { exploded: boolean; onExplode:
       onPointerLeave={() => setHovered(false)}
     >
       {circleData.map((circle, i) => (
-        <mesh 
-          key={i} 
-          position={circle.position} 
-          rotation={circle.rotation}
-        >
-          <sphereGeometry args={[0.12, 16, 16]} />
-          <meshStandardMaterial 
-            color={hovered ? "#22d3ee" : "#06b6d4"} 
-            emissive={hovered ? "#22d3ee" : "#06b6d4"}
-            emissiveIntensity={hovered ? 0.8 : 0.5}
-            metalness={0.9}
-            roughness={0.1}
-            transparent
-            opacity={1}
-          />
-        </mesh>
+        <group key={i} position={circle.position} rotation={circle.rotation}>
+          {/* Main sphere */}
+          <mesh>
+            <sphereGeometry args={[0.22, 16, 16]} />
+            <meshStandardMaterial 
+              color={hovered ? "#a0ee22" : "#06b6d4"} 
+              emissive={hovered ? "#eee022" : "#06b6d4"}
+              emissiveIntensity={hovered ? 0.8 : 0.5}
+              metalness={0.9}
+              roughness={0.1}
+              transparent
+              opacity={1}
+            />
+          </mesh>
+          {/* Black wireframe border */}
+          <mesh>
+            <sphereGeometry args={[0.23, 6, 6]} />
+            <meshBasicMaterial 
+              color="#000000"
+              wireframe={true}
+              transparent
+              opacity={0.6}
+            />
+          </mesh>
+        </group>
       ))}
     </group>
   );
@@ -177,7 +186,7 @@ function EnergyParticles() {
           Math.sin(phi) * Math.sin(theta) * speed,
           Math.cos(phi) * speed
         ),
-        size: 0.05 + Math.random() * 0.25,
+        size: 0.02 + Math.random() * 0.08,
         color: Math.random() > 0.85 ? (Math.random() > 0.5 ? '#06b6d4' : '#84cc16') : '#ffffff',
         initialDelay: Math.random() * 2
       });
