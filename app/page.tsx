@@ -256,69 +256,119 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SECTION 4 – SOLUTION with Glassmorphism Cards */}
-      <section className="h-screen flex flex-col justify-center items-center snap-start px-6 relative overflow-hidden">
-        {/* Subtle gradient background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-cyan-50 to-emerald-50" />
+      {/* SECTION 4 – AUTONOMOUS HIRING INFRASTRUCTURE */}
+      <section className="min-h-screen flex flex-col justify-center items-center snap-start px-6 py-20 relative overflow-hidden bg-white">
+        {/* Light background with subtle gradient */}
+        <div className="absolute inset-0 bg-gradient-to-b from-cyan-50/30 via-white to-emerald-50/30" />
         
-        <motion.div 
-          className="relative z-10 max-w-7xl w-full"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={staggerContainer}
-        >
-          <motion.h2 
-            className="text-5xl md:text-6xl font-black text-center mb-20 bg-gradient-to-r from-blue-700 via-cyan-500 to-emerald-500 bg-clip-text text-transparent"
-            variants={fadeInUp}
-          >
-            Autonomous Hiring Infrastructure
-          </motion.h2>
+        <div className="relative z-10 max-w-7xl w-full">
+          {/* Header */}
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-6xl font-bold text-gray-900 mb-4">
+              Autonomous Hiring Infrastructure
+            </h2>
+            <p className="text-xl md:text-2xl text-gray-700 font-light">
+              Hire People. Deploy Agents. Scale Intelligence.
+            </p>
+          </div>
           
-          <motion.div 
-            className="grid md:grid-cols-3 gap-8"
-            variants={staggerContainer}
-          >
-            {[
-              { 
-                title: 'AI Interviews', 
-                desc: 'Automated technical & behavioral interviews with natural conversation flow.',
-                gradient: 'from-blue-500/10 to-cyan-500/10',
-                icon: '🤖'
-              },
-              { 
-                title: 'Human Validation', 
-                desc: 'Certified interviewers validate top candidates for final excellence.',
-                gradient: 'from-cyan-500/10 to-emerald-500/10',
-                icon: '✓'
-              },
-              { 
-                title: 'Smart Ranking', 
-                desc: 'Bias-free performance-based ranking dashboard with real-time insights.',
-                gradient: 'from-cyan-500/10 to-blue-500/10',
-                icon: '📊'
-              }
-            ].map((card, i) => (
-              <motion.div
-                key={i}
-                className={`relative p-8 rounded-3xl bg-gradient-to-br ${card.gradient} backdrop-blur-xl border border-white/20 shadow-xl`}
-                variants={fadeInUp}
-                whileHover={cardHover}
-              >
-                {/* Glass effect overlay */}
-                <div className="absolute inset-0 rounded-3xl bg-white/60 backdrop-blur-md" />
-                
-                <div className="relative z-10">
-                  <div className="text-5xl mb-6">{card.icon}</div>
-                  <h3 className="font-bold text-2xl mb-4 bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">
-                    {card.title}
-                  </h3>
-                  <p className="text-gray-700 leading-relaxed">{card.desc}</p>
+          {/* Workflow Pipeline */}
+          <div className="mb-20">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-6 md:gap-4 relative">
+              {/* Connecting lines - hidden on mobile */}
+              <div className="hidden md:block absolute top-16 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-500/30 via-cyan-500/50 to-emerald-500/30" />
+              
+              {[
+                { 
+                  title: 'AI Resume Screening', 
+                  desc: 'Automated filtering and candidate matching.',
+                  icon: '📄'
+                },
+                { 
+                  title: 'AI Interview Agents', 
+                  desc: 'Conversational technical assessments.',
+                  icon: '🤖'
+                },
+                { 
+                  title: 'Smart Ranking Engine', 
+                  desc: 'Performance-based scoring system.',
+                  icon: '📊'
+                },
+                { 
+                  title: 'Certified Human Interviewers', 
+                  desc: 'Expert validation of top candidates.',
+                  icon: '✓'
+                },
+                { 
+                  title: 'Optimized Hiring Decision', 
+                  desc: 'Data-driven selection workflow.',
+                  icon: '🎯'
+                }
+              ].map((step, i) => (
+                <div
+                  key={i}
+                  className="relative flex-1 w-full md:w-auto hover:scale-105 transition-transform duration-200"
+                >
+                  {/* Glow effect */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/20 to-emerald-400/20 rounded-xl blur-xl" />
+                  
+                  {/* Card */}
+                  <div className="relative bg-white border-2 border-gray-200 rounded-xl p-6 shadow-xl">
+                    <div className="flex flex-col items-center text-center">
+                      <div className="text-4xl mb-3 text-gray-900">{step.icon}</div>
+                      <h3 className="font-bold text-lg text-gray-900 mb-2">
+                        {step.title}
+                      </h3>
+                      <p className="text-sm text-gray-700 leading-relaxed">
+                        {step.desc}
+                      </p>
+                    </div>
+                  </div>
                 </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </motion.div>
+              ))}
+            </div>
+          </div>
+          
+          {/* System Capabilities */}
+          <div>
+            <h3 className="text-2xl md:text-3xl font-semibold text-center text-gray-900 mb-10">
+              System Capabilities
+            </h3>
+            
+            <div className="grid md:grid-cols-3 gap-6">
+              {[
+                { 
+                  title: 'Smart Automation', 
+                  desc: 'Reduces manual tasks by handling repetitive workflows autonomously.',
+                  icon: '⚡'
+                },
+                { 
+                  title: 'Instant Processing', 
+                  desc: 'Real-time candidate evaluation with immediate feedback loops.',
+                  icon: '⚙️'
+                },
+                { 
+                  title: 'Learning Engine', 
+                  desc: 'Continuously improves from interactions and outcomes.',
+                  icon: '🧠'
+                }
+              ].map((capability, i) => (
+                <div
+                  key={i}
+                  className="relative p-6 rounded-xl bg-gray-50 border-2 border-gray-200 hover:border-cyan-400 transition-colors duration-200"
+                >
+                  <div className="text-4xl mb-4">{capability.icon}</div>
+                  <h4 className="font-bold text-xl text-gray-900 mb-3">
+                    {capability.title}
+                  </h4>
+                  <p className="text-gray-700 leading-relaxed">
+                    {capability.desc}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* SECTION 5 – BEYOND INTERVIEWS */}
