@@ -317,7 +317,7 @@ export default function Home() {
                 { 
                   title: 'Certified Human Interviewers', 
                   desc: 'Expert validation of top candidates.',
-                  icon: '✓'
+                  icon: '👤'
                 },
                 { 
                   title: 'Optimized Hiring Decision', 
@@ -359,17 +359,17 @@ export default function Home() {
               {[
                 { 
                   title: 'Smart Automation', 
-                  desc: 'Reduces manual tasks by handling repetitive workflows autonomously.',
+                  desc: 'Automate resume screening, interview scheduling, and candidate communications. Let AI handle the repetitive while you focus on the strategic.',
                   icon: '⚡'
                 },
                 { 
                   title: 'Instant Processing', 
-                  desc: 'Real-time candidate evaluation with immediate feedback loops.',
+                  desc: 'Process thousands of applications in seconds. Generate insights in real-time. Make data-driven decisions faster than ever before.',
                   icon: '⚙️'
                 },
                 { 
                   title: 'Learning Engine', 
-                  desc: 'Continuously improves from interactions and outcomes.',
+                  desc: 'Continuously learns from your organization\'s unique patterns and preferences. Gets smarter with every interaction, tailored to your culture.',
                   icon: '🧠'
                 }
               ].map((capability, i) => (
@@ -516,11 +516,23 @@ export default function Home() {
       {/* SECTION 8 – WAITLIST */}
       <section
         id="waitlist"
-        className="h-screen flex flex-col justify-center items-center snap-start px-6 relative overflow-hidden"
+        className="h-screen flex flex-col justify-center items-center snap-start px-6 relative overflow-hidden bg-[#05070F]"
       >
-        {/* Gradient Background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-700 via-cyan-500 to-emerald-500" />
-        <div className="absolute inset-0 bg-black/10" />
+        {/* Subtle Background Accent */}
+        <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 via-transparent to-emerald-500/5 pointer-events-none" />
+        
+        {/* Animated Sci-Fi Grid Background */}
+        <div 
+          className="absolute inset-0 pointer-events-none opacity-40"
+          style={{
+            backgroundImage: `
+              linear-gradient(to right, rgba(6, 182, 212, 0.1) 1px, transparent 1px),
+              linear-gradient(to bottom, rgba(6, 182, 212, 0.1) 1px, transparent 1px)
+            `,
+            backgroundSize: '80px 80px',
+            animation: 'gridDrift 40s linear infinite',
+          }}
+        />
 
         {!isSubmitted ? (
           <motion.div 
@@ -534,58 +546,83 @@ export default function Home() {
               className="text-4xl md:text-5xl font-black text-center mb-4 text-white"
               variants={fadeInUp}
             >
-              Join the Workforce Infrastructure Beta
+              Become a Privileged Founding Member
             </motion.h2>
             <motion.p 
               className="text-center text-white/80 mb-12 text-lg"
               variants={fadeInUp}
             >
-              Be among the first to deploy hybrid human + AI workforce systems
+              Join the exclusive waitlist and be among the first to experience the future of HR. Limited early access available.
             </motion.p>
 
             <motion.form
               action="https://formspree.io/f/mlgwjpnr"
               method="POST"
               onSubmit={handleSubmit}
-              className="space-y-5"
+              className="space-y-6"
               variants={staggerContainer}
             >
-              <motion.input
-                type="text"
-                name="name"
-                placeholder="Full Name"
-                required
-                className="w-full p-5 rounded-2xl bg-white/90 backdrop-blur-md border border-white/20 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white/50 transition"
-                variants={fadeInUp}
-                whileFocus={{ scale: 1.02 }}
-              />
-              <motion.input
-                type="text"
-                name="company"
-                placeholder="Company Name"
-                required
-                className="w-full p-5 rounded-2xl bg-white/90 backdrop-blur-md border border-white/20 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white/50 transition"
-                variants={fadeInUp}
-                whileFocus={{ scale: 1.02 }}
-              />
-              <motion.input
-                type="email"
-                name="email"
-                placeholder="Work Email"
-                required
-                className="w-full p-5 rounded-2xl bg-white/90 backdrop-blur-md border border-white/20 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white/50 transition"
-                variants={fadeInUp}
-                whileFocus={{ scale: 1.02 }}
-              />
+              {/* Full Name Field */}
+              <motion.div variants={fadeInUp}>
+                <label className="block text-white font-semibold mb-2 text-sm">
+                  Full Name
+                </label>
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Enter your full name"
+                  required
+                  className="w-full p-4 rounded-xl bg-slate-900/50 backdrop-blur-md border border-cyan-500/30 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400 transition"
+                />
+              </motion.div>
+
+              {/* Work Email Field */}
+              <motion.div variants={fadeInUp}>
+                <label className="block text-white font-semibold mb-2 text-sm">
+                  Work Email
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="you@company.com"
+                  required
+                  className="w-full p-4 rounded-xl bg-slate-900/50 backdrop-blur-md border border-cyan-500/30 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400 transition"
+                />
+              </motion.div>
+
+              {/* Company Name Field */}
+              <motion.div variants={fadeInUp}>
+                <label className="block text-white font-semibold mb-2 text-sm">
+                  Company Name
+                </label>
+                <input
+                  type="text"
+                  name="company"
+                  placeholder="Your company name"
+                  required
+                  className="w-full p-4 rounded-xl bg-slate-900/50 backdrop-blur-md border border-cyan-500/30 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400 transition"
+                />
+              </motion.div>
+
+              {/* Submit Button */}
               <motion.button
                 type="submit"
-                className="w-full bg-white text-blue-600 px-10 py-5 rounded-2xl font-bold text-lg shadow-2xl hover:shadow-white/30"
+                className="w-full bg-cyan-400 hover:bg-cyan-500 text-black px-10 py-4 rounded-xl font-bold text-lg shadow-lg transition-all flex items-center justify-center gap-2"
                 variants={fadeInUp}
-                whileHover={{ scale: 1.03, y: -2 }}
+                whileHover={{ scale: 1.02, y: -2 }}
                 whileTap={{ scale: 0.98 }}
               >
-                Join Waitlist →
+                Secure Your Spot
+                <span>→</span>
               </motion.button>
+
+              {/* Footer Text */}
+              <motion.p 
+                className="text-center text-slate-400 text-sm mt-4"
+                variants={fadeInUp}
+              >
+                By joining, you'll get exclusive early access, priority support, and special founding member pricing.
+              </motion.p>
             </motion.form>
           </motion.div>
         ) : (
