@@ -94,9 +94,9 @@ export default function Home() {
     <main className="h-screen overflow-y-scroll snap-y snap-mandatory">
 
       {/* SECTION 1 – BRAND INTRO - Deep Navy with Gradient */}
-      <section className="h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-slate-800 to-blue-950 snap-start px-6 relative overflow-hidden">
+      <section className="h-screen flex items-center justify-center bg-gradient-to-br from-slate-800 via-slate-700 to-blue-900 snap-start px-6 relative overflow-hidden">
         {/* Subtle Glow Effect */}
-        <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 via-transparent to-emerald-500/5 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-transparent to-emerald-500/10 pointer-events-none" />
         
         <motion.div 
           className="flex items-center gap-8 relative z-10"
