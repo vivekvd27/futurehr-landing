@@ -129,24 +129,25 @@ function SystemCapabilitiesCards() {
 
               {/* Back Face */}
               <div
-                className="absolute inset-0 p-6 rounded-xl bg-gradient-to-br from-cyan-500 to-emerald-500 shadow-lg overflow-hidden"
+                className="absolute inset-0 p-1 rounded-xl bg-gradient-to-br from-sky-400 to-cyan-400 shadow-lg overflow-hidden"
                 style={{ 
                   backfaceVisibility: 'hidden',
                   transform: 'rotateY(180deg)'
                 }}
               >
-                <div className="relative h-full flex flex-col">
+                <div className="relative h-full flex flex-col bg-white rounded-lg overflow-hidden">
                   <img 
                     src={capability.image} 
                     alt={capability.title}
-                    className="absolute inset-0 w-full h-full object-cover opacity-40 rounded-xl"
+                    className="absolute inset-0 w-full h-full object-cover rounded-lg"
                   />
-                  <div className="relative z-10 h-full flex flex-col items-center justify-center text-center text-white">
-                    <div className="text-6xl mb-4">{capability.icon}</div>
-                    <h4 className="font-bold text-2xl mb-3">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent" />
+                  <div className="relative z-10 h-full flex flex-col items-center justify-center text-center text-white p-6">
+                    <div className="text-6xl mb-4 drop-shadow-lg">{capability.icon}</div>
+                    <h4 className="font-bold text-2xl mb-3 drop-shadow-md">
                       {capability.title}
                     </h4>
-                    <p className="text-sm font-light">
+                    <p className="text-sm font-light drop-shadow">
                       Powered by advanced AI algorithms
                     </p>
                   </div>
@@ -250,24 +251,25 @@ function IndustryAgentCards() {
 
               {/* Back Face */}
               <div
-                className="absolute inset-0 p-6 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-600 shadow-lg overflow-hidden"
+                className="absolute inset-0 p-1 rounded-xl bg-gradient-to-br from-indigo-400 to-purple-400 shadow-lg overflow-hidden"
                 style={{ 
                   backfaceVisibility: 'hidden',
                   transform: 'rotateY(180deg)'
                 }}
               >
-                <div className="relative h-full flex flex-col">
+                <div className="relative h-full flex flex-col bg-white rounded-lg overflow-hidden">
                   <img 
                     src={agent.image} 
                     alt={agent.title}
-                    className="absolute inset-0 w-full h-full object-cover opacity-30 rounded-xl"
+                    className="absolute inset-0 w-full h-full object-cover rounded-lg"
                   />
-                  <div className="relative z-10 h-full flex flex-col items-center justify-center text-center text-white">
-                    <div className="text-5xl mb-3">{agent.icon}</div>
-                    <h3 className="font-bold text-xl mb-2">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent" />
+                  <div className="relative z-10 h-full flex flex-col items-center justify-center text-center text-white p-6">
+                    <div className="text-5xl mb-3 drop-shadow-lg">{agent.icon}</div>
+                    <h3 className="font-bold text-xl mb-2 drop-shadow-md">
                       {agent.title}
                     </h3>
-                    <p className="text-xs font-light">
+                    <p className="text-xs font-light drop-shadow">
                       Industry-optimized AI agents
                     </p>
                   </div>
@@ -368,24 +370,25 @@ function WorkflowPipelineCards() {
 
               {/* Back Face */}
               <div
-                className="absolute inset-0 p-6 rounded-xl bg-gradient-to-br from-orange-500 to-red-500 shadow-lg overflow-hidden"
+                className="absolute inset-0 p-1 rounded-xl bg-gradient-to-br from-emerald-400 to-teal-400 shadow-lg overflow-hidden"
                 style={{ 
                   backfaceVisibility: 'hidden',
                   transform: 'rotateY(180deg)'
                 }}
               >
-                <div className="relative h-full flex flex-col">
+                <div className="relative h-full flex flex-col bg-white rounded-lg overflow-hidden">
                   <img 
                     src={step.image} 
                     alt={step.title}
-                    className="absolute inset-0 w-full h-full object-cover opacity-30 rounded-xl"
+                    className="absolute inset-0 w-full h-full object-cover rounded-lg"
                   />
-                  <div className="relative z-10 h-full flex flex-col items-center justify-center text-center text-white">
-                    <div className="text-5xl mb-3">{step.icon}</div>
-                    <h3 className="font-bold text-xl mb-2">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent" />
+                  <div className="relative z-10 h-full flex flex-col items-center justify-center text-center text-white p-6">
+                    <div className="text-5xl mb-3 drop-shadow-lg">{step.icon}</div>
+                    <h3 className="font-bold text-xl mb-2 drop-shadow-md">
                       {step.title}
                     </h3>
-                    <p className="text-xs font-light">
+                    <p className="text-xs font-light drop-shadow">
                       Step {i + 1} of 5
                     </p>
                   </div>
