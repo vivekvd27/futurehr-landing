@@ -10,6 +10,7 @@ function HoneycombGlobe({ exploded, onExplode }: { exploded: boolean; onExplode:
   const [hovered, setHovered] = useState(false);
   const { camera } = useThree();
   const timeRef = useRef(0);
+  const scaleRef = useRef(1);
   
   // Create honeycomb pattern with circles
   const circleData = useMemo(() => {
@@ -55,6 +56,11 @@ function HoneycombGlobe({ exploded, onExplode }: { exploded: boolean; onExplode:
     if (globeRef.current && !exploded) {
       globeRef.current.rotation.y = state.clock.getElapsedTime() * 0.3;
       globeRef.current.rotation.x = Math.sin(state.clock.getElapsedTime() * 0.2) * 0.1;
+      
+      // Smooth scale animation on hover
+      const targetScale = hovered ? 1.15 : 1;
+      scaleRef.current += (targetScale - scaleRef.current) * 0.1;
+      globeRef.current.scale.setScalar(scaleRef.current);
     }
     
     // Explosion animation
