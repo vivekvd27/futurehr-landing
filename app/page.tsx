@@ -95,28 +95,33 @@ export default function Home() {
 
       {/* SECTION 1 – BRAND INTRO - Futuristic Dark Navy */}
       <section className="h-screen flex items-center justify-center bg-[#05070F] snap-start px-6 relative overflow-hidden">
-        {/* Animated Grid Overlay */}
+        {/* Subtle Background Accent */}
+        <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 via-transparent to-emerald-500/5 pointer-events-none" />
+        
+        {/* Animated Sci-Fi Grid Background */}
         <div 
-          className="absolute inset-0 pointer-events-none opacity-20"
+          className="absolute inset-0 pointer-events-none opacity-40"
           style={{
             backgroundImage: `
-              linear-gradient(to right, rgba(6, 182, 212, 0.15) 1px, transparent 1px),
-              linear-gradient(to bottom, rgba(6, 182, 212, 0.15) 1px, transparent 1px)
+              linear-gradient(to right, rgba(6, 182, 212, 0.1) 1px, transparent 1px),
+              linear-gradient(to bottom, rgba(6, 182, 212, 0.1) 1px, transparent 1px)
             `,
-            backgroundSize: '100px 100px',
-            animation: 'gridDrift 50s linear infinite',
+            backgroundSize: '80px 80px',
+            animation: 'gridDrift 40s linear infinite',
           }}
         />
         
-        {/* Radial Glow Behind Text */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <div 
-            className="w-[800px] h-[800px] rounded-full blur-3xl opacity-30"
-            style={{
-              background: 'radial-gradient(circle, rgba(6, 182, 212, 0.3) 0%, rgba(16, 185, 129, 0.2) 40%, transparent 70%)'
-            }}
-          />
-        </div>
+        {/* Grid Glow Points */}
+        <div 
+          className="absolute inset-0 pointer-events-none opacity-30"
+          style={{
+            backgroundImage: `
+              radial-gradient(circle at 0 0, rgba(6, 182, 212, 0.2) 2px, transparent 2px)
+            `,
+            backgroundSize: '80px 80px',
+            animation: 'gridDrift 40s linear infinite',
+          }}
+        />
         
         <motion.div 
           className="flex items-center gap-8 relative z-10"
