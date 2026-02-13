@@ -256,49 +256,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SECTION 3 – PROBLEM */}
-      <AnimatedSection className="h-screen flex flex-col justify-center items-center bg-white snap-start px-6">
-        <motion.div 
-          className="max-w-4xl"
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          <motion.h2 
-            className="text-5xl md:text-6xl font-black text-center mb-16 bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent"
-            variants={fadeInUp}
-          >
-            HR Operations Are Bottlenecked
-          </motion.h2>
-          <motion.div 
-            className="space-y-6"
-            variants={staggerContainer}
-          >
-            {[
-              { icon: '⏳', text: 'Hiring cycles take 45–60 days', stat: '45-60 days' },
-              { icon: '🔁', text: 'Manual repetitive HR workflows', stat: '70% manual' },
-              { icon: '🚧', text: 'Slow scaling of HR teams', stat: '3-6 months' },
-              { icon: '👥', text: 'High dependency on human bandwidth', stat: 'Limited capacity' },
-              { icon: '📊', text: 'Lack of structured intelligence infrastructure', stat: 'Siloed data' }
-            ].map((item, i) => (
-              <motion.div
-                key={i}
-                className="flex items-center gap-6 p-6 rounded-2xl bg-gradient-to-r from-gray-50 to-white border border-gray-100 backdrop-blur-sm"
-                variants={fadeInUp}
-                whileHover={{ scale: 1.02, x: 10 }}
-              >
-                <div className="text-4xl">{item.icon}</div>
-                <div className="flex-1">
-                  <p className="text-xl font-semibold text-gray-800">{item.text}</p>
-                </div>
-                <div className="text-sm font-bold text-gray-400 hidden md:block">{item.stat}</div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </motion.div>
-      </AnimatedSection>
-
       {/* SECTION 4 – SOLUTION with Glassmorphism Cards */}
       <section className="h-screen flex flex-col justify-center items-center snap-start px-6 relative overflow-hidden">
         {/* Subtle gradient background */}
