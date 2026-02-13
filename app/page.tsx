@@ -357,6 +357,10 @@ function WorkflowPipelineCards() {
                 <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/0 to-emerald-400/0 group-hover:from-cyan-400/10 group-hover:to-emerald-400/10 rounded-xl transition-all duration-300" />
                 
                 <div className="relative flex flex-col items-center text-center h-full">
+                  {/* Step Number Badge */}
+                  <div className="mb-2 px-3 py-1 rounded-full bg-cyan-100 text-cyan-700 text-xs font-semibold">
+                    Step {i + 1}
+                  </div>
                   <div className="text-4xl mb-3 text-gray-900">{step.icon}</div>
                   <h3 className="font-bold text-lg text-gray-900 mb-2">
                     {step.title}
