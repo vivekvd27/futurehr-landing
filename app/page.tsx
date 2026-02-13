@@ -93,10 +93,30 @@ export default function Home() {
   return (
     <main className="h-screen overflow-y-scroll snap-y snap-mandatory">
 
-      {/* SECTION 1 – BRAND INTRO - Deep Navy with Gradient */}
-      <section className="h-screen flex items-center justify-center bg-gradient-to-br from-slate-800 via-slate-700 to-blue-900 snap-start px-6 relative overflow-hidden">
-        {/* Subtle Glow Effect */}
-        <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-transparent to-emerald-500/10 pointer-events-none" />
+      {/* SECTION 1 – BRAND INTRO - Futuristic Dark Navy */}
+      <section className="h-screen flex items-center justify-center bg-[#05070F] snap-start px-6 relative overflow-hidden">
+        {/* Animated Grid Overlay */}
+        <div 
+          className="absolute inset-0 pointer-events-none opacity-20"
+          style={{
+            backgroundImage: `
+              linear-gradient(to right, rgba(6, 182, 212, 0.15) 1px, transparent 1px),
+              linear-gradient(to bottom, rgba(6, 182, 212, 0.15) 1px, transparent 1px)
+            `,
+            backgroundSize: '100px 100px',
+            animation: 'gridDrift 50s linear infinite',
+          }}
+        />
+        
+        {/* Radial Glow Behind Text */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <div 
+            className="w-[800px] h-[800px] rounded-full blur-3xl opacity-30"
+            style={{
+              background: 'radial-gradient(circle, rgba(6, 182, 212, 0.3) 0%, rgba(16, 185, 129, 0.2) 40%, transparent 70%)'
+            }}
+          />
+        </div>
         
         <motion.div 
           className="flex items-center gap-8 relative z-10"
@@ -112,7 +132,7 @@ export default function Home() {
           />
           <div>
             <motion.h1 
-              className="text-7xl md:text-9xl font-black tracking-tight bg-gradient-to-r from-cyan-400 via-cyan-300 to-emerald-400 bg-clip-text text-transparent"
+              className="text-7xl md:text-9xl font-black tracking-tight bg-gradient-to-r from-cyan-400 via-sky-300 to-emerald-400 bg-clip-text text-transparent"
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.5 }}
@@ -372,141 +392,78 @@ export default function Home() {
       </section>
 
       {/* SECTION 5 – BEYOND INTERVIEWS */}
-      <section className="h-screen flex flex-col justify-center items-center snap-start px-6 relative overflow-hidden bg-white">
-        <motion.div 
-          className="max-w-7xl w-full"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={staggerContainer}
-        >
-          <motion.h2 
-            className="text-5xl md:text-6xl font-black text-center mb-6 bg-gradient-to-r from-blue-700 via-cyan-500 to-emerald-500 bg-clip-text text-transparent"
-            variants={fadeInUp}
-          >
-            Beyond Interviews
-          </motion.h2>
-          <motion.p 
-            className="text-2xl md:text-3xl text-center mb-20 font-light text-gray-600"
-            variants={fadeInUp}
-          >
-            Hire People. Deploy Agents. Scale Intelligence.
-          </motion.p>
-          
-          <motion.div 
-            className="grid md:grid-cols-3 gap-8"
-            variants={staggerContainer}
-          >
-            {[
-              { 
-                title: 'AI Interview Agents', 
-                desc: 'Automated structured evaluation across technical and behavioral dimensions.',
-                gradient: 'from-blue-500/10 to-cyan-500/10',
-                icon: '🤖',
-                badge: null
-              },
-              { 
-                title: 'Certified Human Interviewers', 
-                desc: 'On-demand domain experts for critical hiring decisions.',
-                gradient: 'from-cyan-500/10 to-emerald-500/10',
-                icon: '👤',
-                badge: null
-              },
-              { 
-                title: 'Industry-Specific AI HR Agents', 
-                desc: 'Vertical AI assistants designed to support repetitive HR workflows across industries such as tech, BPO, healthcare, and manufacturing.',
-                gradient: 'from-cyan-500/10 to-blue-500/10',
-                icon: '🏭',
-                badge: 'Roadmap'
-              }
-            ].map((card, i) => (
-              <motion.div
-                key={i}
-                className={`relative p-8 rounded-3xl bg-gradient-to-br ${card.gradient} backdrop-blur-xl border border-gray-100 shadow-lg`}
-                variants={fadeInUp}
-                whileHover={cardHover}
-              >
-                {/* Glass effect overlay */}
-                <div className="absolute inset-0 rounded-3xl bg-white/60 backdrop-blur-md" />
-                
-                <div className="relative z-10">
-                  {card.badge && (
-                    <div className="inline-block px-3 py-1 mb-4 text-xs font-bold uppercase tracking-wider rounded-full bg-gradient-to-r from-blue-700 to-emerald-500 text-white">
-                      {card.badge}
-                    </div>
-                  )}
-                  <div className="text-5xl mb-6">{card.icon}</div>
-                  <h3 className="font-bold text-2xl mb-4 bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">
-                    {card.title}
-                  </h3>
-                  <p className="text-gray-700 leading-relaxed">{card.desc}</p>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </motion.div>
-      </section>
-
-      {/* SECTION 6 – FROM TOOLS TO INFRASTRUCTURE */}
-      <section className="h-screen flex flex-col justify-center items-center snap-start px-6 bg-white relative">
-        <motion.div 
-          className="max-w-7xl w-full grid md:grid-cols-2 gap-16 items-center"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={staggerContainer}
-        >
-          {/* Left Side - Text Content */}
-          <motion.div variants={fadeInUp}>
-            <h2 className="text-4xl md:text-5xl font-black mb-8 bg-gradient-to-r from-blue-700 via-cyan-500 to-emerald-500 bg-clip-text text-transparent leading-tight">
-              From Hiring Tools to Workforce Infrastructure.
+      <section className="min-h-screen flex flex-col justify-center items-center snap-start px-6 py-20 relative overflow-hidden bg-white">
+        {/* Light background with subtle gradient */}
+        <div className="absolute inset-0 bg-gradient-to-b from-cyan-50/30 via-white to-emerald-50/30" />
+        
+        <div className="relative z-10 max-w-7xl w-full">
+          {/* Header */}
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-6xl font-bold text-gray-900 mb-4">
+              Beyond Interviews
             </h2>
-            
-            <div className="space-y-6 text-gray-700 text-lg leading-relaxed">
-              <div>
-                <h3 className="font-bold text-xl text-gray-900 mb-2">Traditional HR Tools</h3>
-                <p className="font-light">
-                  Built for specific tasks. Hiring, onboarding, and performance systems operate in silos. 
-                  Limited scalability. Manual workflows.
-                </p>
-              </div>
-              
-              <div>
-                <h3 className="font-bold text-xl text-gray-900 mb-2">Workforce Infrastructure</h3>
-                <p className="font-light">
-                  A modular platform where AI agents, human experts, and intelligence systems 
-                  work as unified capability layers. Built to scale with your organization.
-                </p>
-              </div>
-            </div>
-          </motion.div>
+            <p className="text-2xl md:text-3xl text-cyan-600 font-semibold mb-3">
+              Industry-Vertical Specific Agents
+            </p>
+            <p className="text-lg md:text-xl text-gray-700 font-light max-w-3xl mx-auto">
+              Deploy trained AI agents tailored to specific industries and operational workflows.
+            </p>
+          </div>
           
-          {/* Right Side - Visual Blocks */}
-          <motion.div 
-            className="grid grid-cols-2 gap-4"
-            variants={staggerContainer}
-          >
+          {/* Agent Cards Grid */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              { label: 'AI Agents', color: 'from-cyan-500 to-cyan-600' },
-              { label: 'Human Experts', color: 'from-emerald-500 to-emerald-600' },
-              { label: 'Intelligence APIs', color: 'from-blue-600 to-cyan-500' },
-              { label: 'Workflow Modules', color: 'from-emerald-600 to-blue-600' }
-            ].map((block, i) => (
-              <motion.div
+              { 
+                title: 'Coding Agents', 
+                desc: 'Technical screening and code review automation.',
+                icon: '💻'
+              },
+              { 
+                title: 'QA Agents', 
+                desc: 'Automated testing workflows and quality assurance processes.',
+                icon: '🧪'
+              },
+              { 
+                title: 'Sales Agents', 
+                desc: 'Lead qualification and customer outreach automation.',
+                icon: '📈'
+              },
+              { 
+                title: 'Compliance Agents', 
+                desc: 'Regulatory tracking and documentation verification.',
+                icon: '📋'
+              },
+              { 
+                title: 'Customer Support Agents', 
+                desc: 'Query resolution and customer interaction handling.',
+                icon: '💬'
+              },
+              { 
+                title: 'Finance Workflow Agents', 
+                desc: 'Invoice processing and expense workflow automation.',
+                icon: '💰'
+              }
+            ].map((agent, i) => (
+              <div
                 key={i}
-                className={`relative h-32 rounded-2xl bg-gradient-to-br ${block.color} p-6 flex items-end shadow-lg`}
-                variants={fadeInUp}
-                whileHover={{ scale: 1.05, y: -5 }}
-                transition={{ duration: 0.3 }}
+                className="group relative p-6 rounded-xl bg-white border-2 border-gray-200 shadow-lg hover:-translate-y-2 hover:border-cyan-400 transition-all duration-300"
               >
-                <div className="absolute inset-0 bg-white/10 rounded-2xl backdrop-blur-sm" />
-                <span className="relative z-10 text-white font-semibold text-sm">
-                  {block.label}
-                </span>
-              </motion.div>
+                {/* Glow effect on hover */}
+                <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/0 to-emerald-400/0 group-hover:from-cyan-400/10 group-hover:to-emerald-400/10 rounded-xl transition-all duration-300" />
+                
+                <div className="relative">
+                  <div className="text-4xl mb-4">{agent.icon}</div>
+                  <h3 className="font-semibold text-xl text-gray-900 mb-3">
+                    {agent.title}
+                  </h3>
+                  <p className="text-gray-700 leading-relaxed text-sm">
+                    {agent.desc}
+                  </p>
+                </div>
+              </div>
             ))}
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </section>
 
       {/* SECTION 7 – VISION */}
