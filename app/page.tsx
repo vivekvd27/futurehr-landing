@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, useInView } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 
 // Animation variants
 const fadeInUp = {
@@ -48,6 +48,29 @@ function AnimatedSection({ children, className = '' }: { children: React.ReactNo
 }
 
 export default function Home() {
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    
+    try {
+      const response = await fetch(form.action, {
+        method: form.method,
+        body: new FormData(form),
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        setIsSubmitted(true);
+      }
+    } catch (error) {
+      console.error('Form submission error:', error);
+    }
+  };
+
   return (
     <main className="h-screen overflow-y-scroll snap-y snap-mandatory">
 
@@ -250,70 +273,146 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-br from-blue-600 via-purple-600 to-cyan-500" />
         <div className="absolute inset-0 bg-black/10" />
 
-        <motion.div 
-          className="relative z-10 max-w-xl w-full"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={staggerContainer}
-        >
-          <motion.h2 
-            className="text-4xl md:text-5xl font-black text-center mb-4 text-white"
-            variants={fadeInUp}
-          >
-            Join the Private Enterprise Beta
-          </motion.h2>
-          <motion.p 
-            className="text-center text-white/80 mb-12 text-lg"
-            variants={fadeInUp}
-          >
-            Limited spots available for forward-thinking enterprises
-          </motion.p>
-
-          <motion.form
-            action="https://formspree.io/f/mlgwjpnr"
-            method="POST"
-            className="space-y-5"
+        {!isSubmitted ? (
+          <motion.div 
+            className="relative z-10 max-w-xl w-full"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
             variants={staggerContainer}
           >
-            <motion.input
-              type="text"
-              name="name"
-              placeholder="Full Name"
-              required
-              className="w-full p-5 rounded-2xl bg-white/90 backdrop-blur-md border border-white/20 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white/50 transition"
+            <motion.h2 
+              className="text-4xl md:text-5xl font-black text-center mb-4 text-white"
               variants={fadeInUp}
-              whileFocus={{ scale: 1.02 }}
-            />
-            <motion.input
-              type="text"
-              name="company"
-              placeholder="Company Name"
-              required
-              className="w-full p-5 rounded-2xl bg-white/90 backdrop-blur-md border border-white/20 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white/50 transition"
-              variants={fadeInUp}
-              whileFocus={{ scale: 1.02 }}
-            />
-            <motion.input
-              type="email"
-              name="email"
-              placeholder="Work Email"
-              required
-              className="w-full p-5 rounded-2xl bg-white/90 backdrop-blur-md border border-white/20 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white/50 transition"
-              variants={fadeInUp}
-              whileFocus={{ scale: 1.02 }}
-            />
-            <motion.button
-              type="submit"
-              className="w-full bg-white text-blue-600 px-10 py-5 rounded-2xl font-bold text-lg shadow-2xl hover:shadow-white/30"
-              variants={fadeInUp}
-              whileHover={{ scale: 1.03, y: -2 }}
-              whileTap={{ scale: 0.98 }}
             >
-              Join Waitlist →
-            </motion.button>
-          </motion.form>
-        </motion.div>
+              Join the Private Enterprise Beta
+            </motion.h2>
+            <motion.p 
+              className="text-center text-white/80 mb-12 text-lg"
+              variants={fadeInUp}
+            >
+              Limited spots available for forward-thinking enterprises
+            </motion.p>
+
+            <motion.form
+              action="https://formspree.io/f/mlgwjpnr"
+              method="POST"
+              onSubmit={handleSubmit}
+              className="space-y-5"
+              variants={staggerContainer}
+            >
+              <motion.input
+                type="text"
+                name="name"
+                placeholder="Full Name"
+                required
+                className="w-full p-5 rounded-2xl bg-white/90 backdrop-blur-md border border-white/20 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white/50 transition"
+                variants={fadeInUp}
+                whileFocus={{ scale: 1.02 }}
+              />
+              <motion.input
+                type="text"
+                name="company"
+                placeholder="Company Name"
+                required
+                className="w-full p-5 rounded-2xl bg-white/90 backdrop-blur-md border border-white/20 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white/50 transition"
+                variants={fadeInUp}
+                whileFocus={{ scale: 1.02 }}
+              />
+              <motion.input
+                type="email"
+                name="email"
+                placeholder="Work Email"
+                required
+                className="w-full p-5 rounded-2xl bg-white/90 backdrop-blur-md border border-white/20 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white/50 transition"
+                variants={fadeInUp}
+                whileFocus={{ scale: 1.02 }}
+              />
+              <motion.button
+                type="submit"
+                className="w-full bg-white text-blue-600 px-10 py-5 rounded-2xl font-bold text-lg shadow-2xl hover:shadow-white/30"
+                variants={fadeInUp}
+                whileHover={{ scale: 1.03, y: -2 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                Join Waitlist →
+              </motion.button>
+            </motion.form>
+          </motion.div>
+        ) : (
+          <motion.div
+            className="relative z-10 max-w-2xl w-full"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
+            {/* Success Card */}
+            <motion.div
+              className="bg-white/95 backdrop-blur-xl rounded-3xl p-12 md:p-16 shadow-2xl border border-white/30 text-center"
+              initial={{ y: 20 }}
+              animate={{ y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              {/* Success Icon */}
+              <motion.div
+                className="inline-flex items-center justify-center w-20 h-20 md:w-24 md:h-24 rounded-full bg-gradient-to-br from-green-400 to-emerald-500 mb-8 shadow-lg shadow-green-200"
+                initial={{ scale: 0, rotate: -180 }}
+                animate={{ scale: 1, rotate: 0 }}
+                transition={{ 
+                  duration: 0.6, 
+                  delay: 0.3,
+                  type: "spring",
+                  stiffness: 200
+                }}
+              >
+                <svg
+                  className="w-10 h-10 md:w-12 md:h-12 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <motion.path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={3}
+                    d="M5 13l4 4L19 7"
+                    initial={{ pathLength: 0 }}
+                    animate={{ pathLength: 1 }}
+                    transition={{ duration: 0.5, delay: 0.5 }}
+                  />
+                </svg>
+              </motion.div>
+
+              {/* Success Message */}
+              <motion.h2
+                className="text-4xl md:text-5xl font-black mb-6 bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-600 bg-clip-text text-transparent leading-tight"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+              >
+                Welcome, Visionary HR Leader.
+              </motion.h2>
+              
+              <motion.p
+                className="text-xl md:text-2xl text-gray-700 mb-4 font-light leading-relaxed"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.5 }}
+              >
+                You are building tomorrow&apos;s hiring system — today.
+              </motion.p>
+
+              <motion.p
+                className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-600 bg-clip-text text-transparent"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.6 }}
+              >
+                Welcome to FutureHR.
+              </motion.p>
+            </motion.div>
+          </motion.div>
+        )}
       </section>
 
     </main>
