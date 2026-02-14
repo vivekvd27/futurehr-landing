@@ -615,8 +615,7 @@ export default function Home() {
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.98 }}
             >
-              Join the Revolution
-              <span>→</span>
+              Join the Waiting List →
             </motion.a>
           </motion.div>
 
@@ -845,8 +844,7 @@ export default function Home() {
                 whileHover={{ scale: 1.02, y: -2 }}
                 whileTap={{ scale: 0.98 }}
               >
-                Secure Your Spot
-                <span>→</span>
+                Join the Waiting List →
               </motion.button>
 
               {/* Footer Text */}
