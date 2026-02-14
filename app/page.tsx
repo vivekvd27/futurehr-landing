@@ -607,14 +607,15 @@ export default function Home() {
             {/* CTA Button */}
             <motion.a
               href="#waitlist"
-              className="inline-flex items-center gap-2 bg-gradient-to-r from-cyan-500 to-emerald-500 text-slate-900 px-8 py-4 rounded-full font-bold text-lg shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40 transition-all"
+              className="inline-flex items-center gap-2 text-black px-8 py-4 rounded-none font-bold text-lg transition-all"
+              style={{ backgroundColor: '#00FFE6' }}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.7 }}
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.98 }}
             >
-              Access Infrastructure Beta
+              Join the Revolution
               <span>→</span>
             </motion.a>
           </motion.div>
