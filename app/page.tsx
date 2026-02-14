@@ -83,12 +83,11 @@ function SystemCapabilitiesCards() {
     }
   ];
 
-  const toggleFlip = (index: number) => {
-    setFlippedCards(prev => 
-      prev.includes(index) 
-        ? prev.filter(i => i !== index)
-        : [...prev, index]
-    );
+  const handleMouseEnter = (index: number) => {
+    setFlippedCards(prev => [...prev, index]);
+  };
+  const handleMouseLeave = (index: number) => {
+    setFlippedCards(prev => prev.filter(i => i !== index));
   };
 
   return (
@@ -101,7 +100,8 @@ function SystemCapabilitiesCards() {
             key={i}
             className="relative h-[280px] cursor-pointer"
             style={{ perspective: '1000px' }}
-            onClick={() => toggleFlip(i)}
+            onMouseEnter={() => handleMouseEnter(i)}
+            onMouseLeave={() => handleMouseLeave(i)}
           >
             <motion.div
               className="relative w-full h-full"
@@ -205,12 +205,11 @@ function IndustryAgentCards() {
     }
   ];
 
-  const toggleFlip = (index: number) => {
-    setFlippedCards(prev => 
-      prev.includes(index) 
-        ? prev.filter(i => i !== index)
-        : [...prev, index]
-    );
+  const handleMouseEnter = (index: number) => {
+    setFlippedCards(prev => [...prev, index]);
+  };
+  const handleMouseLeave = (index: number) => {
+    setFlippedCards(prev => prev.filter(i => i !== index));
   };
 
   return (
@@ -223,7 +222,8 @@ function IndustryAgentCards() {
             key={i}
             className="relative h-[200px] cursor-pointer"
             style={{ perspective: '1000px' }}
-            onClick={() => toggleFlip(i)}
+            onMouseEnter={() => handleMouseEnter(i)}
+            onMouseLeave={() => handleMouseLeave(i)}
           >
             <motion.div
               className="relative w-full h-full"
@@ -321,12 +321,11 @@ function WorkflowPipelineCards() {
     }
   ];
 
-  const toggleFlip = (index: number) => {
-    setFlippedCards(prev => 
-      prev.includes(index) 
-        ? prev.filter(i => i !== index)
-        : [...prev, index]
-    );
+  const handleMouseEnter = (index: number) => {
+    setFlippedCards(prev => [...prev, index]);
+  };
+  const handleMouseLeave = (index: number) => {
+    setFlippedCards(prev => prev.filter(i => i !== index));
   };
 
   return (
@@ -340,7 +339,8 @@ function WorkflowPipelineCards() {
             <div
               className="relative flex-1 w-full md:w-auto h-[220px] cursor-pointer"
               style={{ perspective: '1000px' }}
-              onClick={() => toggleFlip(i)}
+              onMouseEnter={() => handleMouseEnter(i)}
+              onMouseLeave={() => handleMouseLeave(i)}
             >
               <motion.div
                 className="relative w-full h-full"
