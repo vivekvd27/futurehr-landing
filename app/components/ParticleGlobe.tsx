@@ -5,9 +5,8 @@ import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
 
 // Honeycomb wireframe globe
-function HoneycombGlobe({ exploded, onExplode }: { exploded: boolean; onExplode: () => void }) {
+function HoneycombGlobe({ hovered, onHoverChange }: { hovered: boolean; onHoverChange: (hovered: boolean) => void }) {
   const globeRef = useRef<THREE.Group>(null);
-  const [hovered, setHovered] = useState(false);
   const { camera } = useThree();
   const timeRef = useRef(0);
   const scaleRef = useRef(1);
@@ -53,18 +52,33 @@ function HoneycombGlobe({ exploded, onExplode }: { exploded: boolean; onExplode:
   }, []);
   
   useFrame((state) => {
-    if (globeRef.current && !exploded) {
-      globeRef.current.rotation.y = state.clock.getElapsedTime() * 0.3;
-      globeRef.current.rotation.x = Math.sin(state.clock.getElapsedTime() * 0.2) * 0.1;
+    if (globeRef.current) {
+      if (!hovered) {
+        globeRef.current.rotation.y = state.clock.getElapsedTime() * 0.3;
+        globeRef.current.rotation.x = Math.sin(state.clock.getElapsedTime() * 0.2) * 0.1;
+        
+        // Reset spheres to original positions when not hovering
+        globeRef.current.children.forEach((child, i) => {
+          const data = circleData[i];
+          child.position.copy(data.originalPosition);
+          child.rotation.set(data.rotation[0], data.rotation[1], data.rotation[2]);
+          
+          const mesh = child.children[0] as THREE.Mesh;
+          if (mesh && mesh.material) {
+            const material = mesh.material as THREE.MeshStandardMaterial;
+            material.opacity = 1;
+          }
+        });
+      }
       
-      // Smooth scale animation on hover
+      // Smooth scale animation
       const targetScale = hovered ? 1.15 : 1;
       scaleRef.current += (targetScale - scaleRef.current) * 0.1;
       globeRef.current.scale.setScalar(scaleRef.current);
     }
     
     // Explosion animation
-    if (exploded && globeRef.current) {
+    if (hovered && globeRef.current) {
       const explosionTime = state.clock.getElapsedTime() % 6;
       
       if (explosionTime < 2.5) {
@@ -82,7 +96,9 @@ function HoneycombGlobe({ exploded, onExplode }: { exploded: boolean; onExplode:
           
           // Fade out
           const material = (child as THREE.Mesh).material as THREE.MeshStandardMaterial;
-          material.opacity = 1 - easeOut * 0.7;
+          if (material) {
+            material.opacity = 1 - easeOut * 0.7;
+          }
           
           // Random rotation during explosion
           child.rotation.x += 0.05;
@@ -92,7 +108,11 @@ function HoneycombGlobe({ exploded, onExplode }: { exploded: boolean; onExplode:
         // Hold dispersed
         globeRef.current.children.forEach((child) => {
           const material = (child as THREE.Mesh).material as THREE.MeshStandardMaterial;
-          material.opacity = 0.3;
+          if (material) {
+            if (material) {
+              material.opacity = 0.3;
+            }
+          }
         });
       } else {
         // Reassemble
@@ -111,17 +131,14 @@ function HoneycombGlobe({ exploded, onExplode }: { exploded: boolean; onExplode:
           
           // Fade back in
           const material = (child as THREE.Mesh).material as THREE.MeshStandardMaterial;
-          material.opacity = 0.3 + easeIn * 0.7;
+          if (material) {
+            material.opacity = 0.3 + easeIn * 0.7;
+          }
         });
       }
     }
   });
   
-  // Handle click
-  const handleClick = () => {
-    onExplode();
-  };
-
   // Animate glow effect
   useFrame((state) => {
     timeRef.current = state.clock.elapsedTime;
@@ -149,9 +166,8 @@ function HoneycombGlobe({ exploded, onExplode }: { exploded: boolean; onExplode:
   return (
     <group 
       ref={globeRef} 
-      onClick={handleClick}
-      onPointerEnter={() => setHovered(true)}
-      onPointerLeave={() => setHovered(false)}
+      onPointerEnter={() => onHoverChange(true)}
+      onPointerLeave={() => onHoverChange(false)}
     >
       {circleData.map((circle, i) => (
         <group key={i} position={circle.position} rotation={circle.rotation}>
@@ -175,8 +191,9 @@ function HoneycombGlobe({ exploded, onExplode }: { exploded: boolean; onExplode:
 }
 
 // Energy particles bursting out
-function EnergyParticles() {
+function EnergyParticles({ visible }: { visible: boolean }) {
   const particlesRef = useRef<THREE.Group>(null);
+  const startTimeRef = useRef<number | null>(null);
   
   const particles = useMemo(() => {
     const count = 80;
@@ -218,18 +235,33 @@ function EnergyParticles() {
   
   useFrame((state) => {
     if (particlesRef.current) {
+      // If not visible, reset start time and hide all particles
+      if (!visible) {
+        startTimeRef.current = null;
+        particlesRef.current.children.forEach((child) => {
+          child.visible = false;
+        });
+        return;
+      }
+      
+      // Set start time when hovering begins
+      if (startTimeRef.current === null) {
+        startTimeRef.current = state.clock.getElapsedTime();
+      }
+      
+      const hoverTime = state.clock.getElapsedTime() - startTimeRef.current;
+      
       particlesRef.current.children.forEach((child, i) => {
         const particle = particles[i];
-        const time = state.clock.getElapsedTime();
         
         // Reset particle after delay
-        if (time < particle.initialDelay) {
+        if (hoverTime < particle.initialDelay) {
           child.visible = false;
           return;
         }
         
         child.visible = true;
-        const localTime = (time - particle.initialDelay) % 4;
+        const localTime = (hoverTime - particle.initialDelay) % 4;
         
         // Update position
         child.position.x = particle.position.x + particle.velocity.x * localTime;
@@ -250,9 +282,9 @@ function EnergyParticles() {
   });
   
   return (
-    <group ref={particlesRef}>
+    <group ref={particlesRef} visible={visible}>
       {particles.map((particle, i) => (
-        <mesh key={i}>
+        <mesh key={i} visible={false}>
           <sphereGeometry args={[particle.size, 16, 16]} />
           <meshStandardMaterial 
             color={particle.color}
@@ -269,16 +301,15 @@ function EnergyParticles() {
 }
 
 function GlobeScene() {
-  const [exploded, setExploded] = useState(false);
-  
-  const handleExplode = () => {
-    setExploded(true);
-  };
+  const [hovered, setHovered] = useState(false);
   
   return (
     <>
-      <HoneycombGlobe exploded={exploded} onExplode={handleExplode} />
-      <EnergyParticles />
+      <HoneycombGlobe 
+        hovered={hovered}
+        onHoverChange={setHovered}
+      />
+      {hovered && <EnergyParticles visible={hovered} />}
     </>
   );
 }
@@ -291,18 +322,18 @@ export default function ParticleGlobe() {
       gl={{ antialias: true, alpha: true }}
     >
       {/* Enhanced lighting for 3D effect */}
-      <ambientLight intensity={0.6} />
-      <pointLight position={[5, 5, 5]} intensity={2} color="#06b6d4" />
-      <pointLight position={[-5, -5, -5]} intensity={1.2} color="#10b981" />
-      <pointLight position={[0, 0, 8]} intensity={1.5} color="#ffffff" />
-      <directionalLight position={[3, 3, 3]} intensity={1.5} color="#ffffff" />
-      <directionalLight position={[-3, -3, -3]} intensity={0.8} color="#06b6d4" />
+      <ambientLight intensity={0.4} />
+      <pointLight position={[5, 5, 5]} intensity={1.8} color="#06b6d4" />
+      <pointLight position={[-5, -5, -5]} intensity={1} color="#10b981" />
+      <pointLight position={[0, 0, 8]} intensity={0.8} color="#06b6d4" />
+      <directionalLight position={[3, 3, 3]} intensity={0.8} color="#06b6d4" />
+      <directionalLight position={[-3, -3, -3]} intensity={0.6} color="#06b6d4" />
       <spotLight 
         position={[0, 10, 0]} 
-        intensity={1.5} 
+        intensity={1} 
         angle={0.6} 
         penumbra={1} 
-        color="#ffffff"
+        color="#06b6d4"
       />
       
       <GlobeScene />
