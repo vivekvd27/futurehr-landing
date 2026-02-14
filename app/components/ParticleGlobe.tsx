@@ -20,8 +20,8 @@ function HoneycombGlobe({ hovered, onHoverChange }: { hovered: boolean; onHoverC
       originalPosition: THREE.Vector3;
       velocity: THREE.Vector3;
     }> = [];
-    const layers = 12;
-    const circlesPerLayer = 16;
+    const layers = 17;
+    const circlesPerLayer = 28;
     const radius = 2;
     
     for (let i = 0; i < layers; i++) {
