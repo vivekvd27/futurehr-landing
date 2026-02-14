@@ -852,7 +852,7 @@ export default function Home() {
                 className="text-center text-slate-400 text-sm mt-4"
                 variants={fadeInUp}
               >
-                By joining, you'll get exclusive early access, priority support, and special founding member pricing.
+                By joining, you'll get exclusive early access, priority support, and special early-member pricing.
               </motion.p>
             </motion.form>
           </motion.div>
