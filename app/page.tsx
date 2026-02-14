@@ -690,10 +690,7 @@ export default function Home() {
               Beyond Interviews
             </h2>
             <p className="text-2xl md:text-3xl text-cyan-600 font-semibold mb-3">
-              Industry-Vertical Specific Agents
-            </p>
-            <p className="text-lg md:text-xl text-gray-700 font-light max-w-3xl mx-auto">
-              Deploy trained AI agents tailored to specific industries and operational workflows.
+              Deploy Industry-Vertical & Operational Workflow Specific Trained AI Agents
             </p>
           </div>
           
