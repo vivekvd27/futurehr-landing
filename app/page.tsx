@@ -142,7 +142,7 @@ function SystemCapabilitiesCards() {
                     alt={capability.title}
                     className="absolute inset-0 w-full h-full object-cover rounded-lg"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent" />
+                  <div className="absolute inset-0 rounded-lg" style={{ backgroundColor: '#06b6d4', opacity: 0.4 }} />
                   <div className="relative z-10 h-full flex flex-col items-center justify-center text-center text-white p-6">
                     <div className="text-6xl mb-4 drop-shadow-lg">{capability.icon}</div>
                     <h4 className="font-bold text-2xl mb-3 drop-shadow-md">
@@ -264,7 +264,7 @@ function IndustryAgentCards() {
                     alt={agent.title}
                     className="absolute inset-0 w-full h-full object-cover rounded-lg"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent" />
+                      <div className="absolute inset-0 rounded-lg" style={{ backgroundColor: '#06b6d4', opacity: 0.4 }} />
                   <div className="relative z-10 h-full flex flex-col items-center justify-center text-center text-white p-6">
                     <div className="text-5xl mb-3 drop-shadow-lg">{agent.icon}</div>
                     <h3 className="font-bold text-xl mb-2 drop-shadow-md">
@@ -385,7 +385,7 @@ function WorkflowPipelineCards() {
                     alt={step.title}
                     className="absolute inset-0 w-full h-full object-cover rounded-lg"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent" />
+                       <div className="absolute inset-0 rounded-lg" style={{ backgroundColor: '#06b6d4', opacity: 0.4 }} />
                   <div className="relative z-10 h-full flex flex-col items-center justify-center text-center text-white p-6">
                     <div className="text-5xl mb-3 drop-shadow-lg">{step.icon}</div>
                     <h3 className="font-bold text-xl mb-2 drop-shadow-md">
