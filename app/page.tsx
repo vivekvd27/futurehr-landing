@@ -67,13 +67,13 @@ function SystemCapabilitiesCards() {
       title: 'Smart Automation', 
       desc: 'Automate resume screening, interview scheduling, and candidate communications. Let AI handle the repetitive while you focus on the strategic.',
       icon: '⚡',
-      image: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&auto=format&fit=crop'
+      image: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&auto=format&fit=crop' // Computer automation
     },
     { 
       title: 'Instant Processing', 
       desc: 'Process thousands of applications in seconds. Generate insights in real-time. Make data-driven decisions faster than ever before.',
       icon: '⚙️',
-      image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&auto=format&fit=crop'
+      image: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=800&auto=format&fit=crop' // Alternate chip/processor diagram
     },
     { 
       title: 'Learning Engine', 
