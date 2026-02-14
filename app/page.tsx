@@ -779,7 +779,7 @@ export default function Home() {
               className="text-4xl md:text-5xl font-black text-center mb-4 text-white"
               variants={fadeInUp}
             >
-              Enter the Innovation Circle!
+              Step Into the Future of HR!
             </motion.h2>
             <motion.p 
               className="text-center text-white/80 mb-12 text-lg"
