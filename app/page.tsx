@@ -628,7 +628,7 @@ export default function Home() {
           >
             {/* Gentle Float Container */}
             <motion.div
-              className="relative w-full max-w-[280px] md:max-w-[400px] aspect-square"
+              className="relative w-full max-w-[480px] md:max-w-[700px] aspect-square"
               animate={{
                 y: [0, -15, 0],
               }}
