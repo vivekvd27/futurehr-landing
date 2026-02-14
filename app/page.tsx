@@ -514,7 +514,7 @@ export default function Home() {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.7 }}
             >
-              Intelligent Workforce Infrastructure
+              Future Hiring Intelligence
             </motion.p>
           </div>
         </motion.div>
