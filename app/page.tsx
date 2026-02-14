@@ -173,12 +173,12 @@ function IndustryAgentCards() {
       icon: '💻',
       image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&auto=format&fit=crop'
     },
-    { 
-      title: 'QA Agents', 
-      desc: 'Automated testing workflows and quality assurance processes.',
-      icon: '🧪',
-      image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&auto=format&fit=crop'
-    },
+        { 
+          title: 'QA Agents', 
+          desc: 'Automated testing workflows and quality assurance processes.',
+          icon: '✅', // More computer-relevant icon
+          image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&auto=format&fit=crop'
+        },
     { 
       title: 'Sales Agents', 
       desc: 'Lead qualification and customer outreach automation.',
@@ -305,7 +305,7 @@ function WorkflowPipelineCards() {
       title: 'Smart Ranking Engine', 
       desc: 'Performance-based scoring system.',
       icon: '📊',
-      image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&auto=format&fit=crop'
+      image: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800&auto=format&fit=crop' // New image: analytics/data/ranking
     },
     { 
       title: 'Certified Human Interviewers', 
@@ -740,7 +740,7 @@ export default function Home() {
           >
             <p className="text-lg md:text-xl text-gray-600 leading-relaxed">
               FutureHR is built as a modular workforce infrastructure platform. 
-              Enterprises can activate AI agents, human experts, and intelligence modules as needed.
+              You activate AI agents, human experts, and intelligence modules — exactly when you need them.
             </p>
           </motion.div>
         </motion.div>
