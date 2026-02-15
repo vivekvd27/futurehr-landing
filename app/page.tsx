@@ -506,7 +506,7 @@ export default function Home() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.5 }}
             >
-              FutureHR
+                PeopleOS
             </motion.h1>
             <motion.p 
               className="text-xl md:text-2xl text-slate-400 font-light tracking-wide mt-2"
@@ -729,7 +729,7 @@ export default function Home() {
               Enterprises will increasingly hire both humans and AI agents.
             </p>
             <p className="text-gray-900 font-normal">
-              FutureHR is building the infrastructure to enable that transition.
+              PeopleOS is building the infrastructure to enable that transition.
             </p>
           </motion.div>
 
@@ -738,7 +738,7 @@ export default function Home() {
             variants={fadeInUp}
           >
             <p className="text-lg md:text-xl text-gray-600 leading-relaxed">
-              FutureHR is built as a modular workforce infrastructure platform. 
+              PeopleOS is built as a modular workforce infrastructure platform. 
               You activate AI agents, human experts, and intelligence modules — exactly when you need them.
             </p>
           </motion.div>
@@ -925,7 +925,7 @@ export default function Home() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.6 }}
               >
-                Welcome to FutureHR.
+                Welcome to PeopleOS.
               </motion.p>
             </motion.div>
           </motion.div>
