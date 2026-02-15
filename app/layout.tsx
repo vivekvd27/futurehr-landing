@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import PeopleOSLogo from "./components/PeopleOSLogo";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,6 +29,9 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         suppressHydrationWarning
       >
+        <div style={{ padding: '24px 0 0 24px', position: 'fixed', zIndex: 1000 }}>
+          <PeopleOSLogo />
+        </div>
         {children}
       </body>
     </html>
