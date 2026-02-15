@@ -508,14 +508,19 @@ export default function Home() {
             >
                 PeopleOS
             </motion.h1>
-            <motion.p 
-              className="text-xl md:text-2xl text-slate-400 font-light tracking-wide mt-2"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.7 }}
-            >
-              Future Hiring Intelligence
-            </motion.p>
+            <div className="text-xl md:text-2xl text-slate-400 font-light tracking-wide mt-2 flex flex-wrap">
+              {Array.from("Future Hiring Intelligence").map((letter, idx) => (
+                <motion.span
+                  key={idx}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3, delay: 0.7 + idx * 0.07 }}
+                  style={{ display: letter === ' ' ? 'inline-block' : 'inline' }}
+                >
+                  {letter === ' ' ? '\u00A0' : letter}
+                </motion.span>
+              ))}
+            </div>
           </div>
         </motion.div>
       </section>
