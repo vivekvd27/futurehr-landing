@@ -512,9 +512,9 @@ export default function Home() {
               {Array.from("Future Hiring Intelligence").map((letter, idx) => (
                 <motion.span
                   key={idx}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.3, delay: 0.7 + idx * 0.07 }}
+                  initial={{ opacity: 0, filter: 'blur(4px)' }}
+                  animate={{ opacity: 1, filter: 'blur(0px)' }}
+                  transition={{ duration: 0.4, delay: 0.7 + idx * 0.09 }}
                   style={{ display: letter === ' ' ? 'inline-block' : 'inline' }}
                 >
                   {letter === ' ' ? '\u00A0' : letter}
