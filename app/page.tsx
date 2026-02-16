@@ -217,15 +217,14 @@ function WorkflowPipelineCards() {
   };
 
   return (
-    <div className="flex flex-col md:flex-row items-center gap-2 md:gap-3 relative">
-      
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:flex md:flex-row items-center gap-2 md:gap-3 relative">
       {steps.map((step, i) => {
         const isFlipped = flippedCards.includes(i);
         
         return (
           <React.Fragment key={i}>
             <div
-              className="relative flex-1 w-full md:w-auto h-[170px] cursor-pointer"
+              className="relative w-full h-[200px] md:flex-1 md:w-auto md:h-[170px] cursor-pointer"
               style={{ perspective: '1000px' }}
               onMouseEnter={() => handleMouseEnter(i)}
               onMouseLeave={() => handleMouseLeave(i)}
