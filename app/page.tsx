@@ -164,7 +164,8 @@ function SystemCapabilitiesCards() {
 
 // Industry Agent Flip Cards Component
 function IndustryAgentCards() {
-  const [flippedCards, setFlippedCards] = useState<number[]>([]);
+  // By default, all cards are flipped (showing image). On hover, show text side.
+  const [flippedCards, setFlippedCards] = useState<number[]>(Array.from({length: 6}, (_, i) => i));
 
   const agents = [
     { 
@@ -206,17 +207,16 @@ function IndustryAgentCards() {
   ];
 
   const handleMouseEnter = (index: number) => {
-    setFlippedCards(prev => [...prev, index]);
+    setFlippedCards(prev => prev.filter(i => i !== index)); // Remove index to flip to text
   };
   const handleMouseLeave = (index: number) => {
-    setFlippedCards(prev => prev.filter(i => i !== index));
+    setFlippedCards(prev => [...prev, index]); // Add index to flip back to image
   };
 
   return (
     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
       {agents.map((agent, i) => {
         const isFlipped = flippedCards.includes(i);
-        
         return (
           <div
             key={i}
@@ -231,14 +231,39 @@ function IndustryAgentCards() {
               transition={{ duration: 0.6, type: 'spring', stiffness: 100 }}
               style={{ transformStyle: 'preserve-3d' }}
             >
-              {/* Front Face */}
+              {/* Front Face (now image side) */}
+              <div
+                className="absolute inset-0 p-1 rounded-xl bg-gradient-to-br from-indigo-400 to-purple-400 shadow-lg overflow-hidden"
+                style={{ backfaceVisibility: 'hidden' }}
+              >
+                <div className="relative h-full flex flex-col bg-white rounded-lg overflow-hidden">
+                  <img 
+                    src={agent.image} 
+                    alt={agent.title}
+                    className="absolute inset-0 w-full h-full object-cover rounded-lg"
+                  />
+                  <div className="absolute inset-0 rounded-lg" style={{ backgroundColor: '#06b6d4', opacity: 0.4 }} />
+                  <div className="relative z-10 h-full flex flex-col items-center justify-center text-center text-white p-6">
+                    <div className="text-5xl mb-3 drop-shadow-lg">{agent.icon}</div>
+                    <h3 className="font-bold text-xl mb-2 drop-shadow-md">
+                      {agent.title}
+                    </h3>
+                    <p className="text-xs font-light drop-shadow">
+                      Industry-optimized AI agents
+                    </p>
+                  </div>
+                </div>
+              </div>
+              {/* Back Face (now text side) */}
               <div
                 className="absolute inset-0 group p-3 rounded-lg bg-white border-2 border-gray-200 shadow-lg hover:border-cyan-400 transition-all duration-300"
-                style={{ backfaceVisibility: 'hidden' }}
+                style={{ 
+                  backfaceVisibility: 'hidden',
+                  transform: 'rotateY(180deg)'
+                }}
               >
                 {/* Glow effect on hover */}
                 <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/0 to-emerald-400/0 group-hover:from-cyan-400/10 group-hover:to-emerald-400/10 rounded-lg transition-all duration-300" />
-                
                 <div className="relative h-full flex flex-col">
                   <div className="text-2xl mb-2">{agent.icon}</div>
                   <h3 className="font-semibold text-base text-gray-900 mb-2">
