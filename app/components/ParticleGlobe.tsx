@@ -6,160 +6,59 @@ import * as THREE from 'three';
 
 // Honeycomb wireframe globe
 function HoneycombGlobe({ hovered, onHoverChange }: { hovered: boolean; onHoverChange: (hovered: boolean) => void }) {
+    // Create honeycomb pattern with circles
+    const circleData = useMemo(() => {
+      const circles: Array<{ 
+        position: [number, number, number]; 
+        rotation: [number, number, number]; 
+        radius: number;
+        originalPosition: THREE.Vector3;
+      }> = [];
+      const layers = 17;
+      const circlesPerLayer = 28;
+      const radius = 2;
+      for (let i = 0; i < layers; i++) {
+        const phi = (Math.PI * i) / (layers - 1);
+        const y = radius * Math.cos(phi);
+        const ringRadius = radius * Math.sin(phi);
+        const numCircles = Math.max(4, Math.floor(circlesPerLayer * Math.sin(phi)));
+        for (let j = 0; j < numCircles; j++) {
+          const theta = (2 * Math.PI * j) / numCircles;
+          const x = ringRadius * Math.cos(theta);
+          const z = ringRadius * Math.sin(theta);
+          const pos = new THREE.Vector3(x, y, z);
+          circles.push({
+            position: [x, y, z],
+            rotation: [phi, theta, 0],
+            radius: 0.18,
+            originalPosition: pos.clone(),
+          });
+        }
+      }
+      return circles;
+    }, []);
   const globeRef = useRef<THREE.Group>(null);
-  const { camera } = useThree();
-  const timeRef = useRef(0);
   const scaleRef = useRef(1);
-  
-  // Create honeycomb pattern with circles
-  const circleData = useMemo(() => {
-    const circles: Array<{ 
-      position: [number, number, number]; 
-      rotation: [number, number, number]; 
-      radius: number;
-      originalPosition: THREE.Vector3;
-      velocity: THREE.Vector3;
-    }> = [];
-    const layers = 17;
-    const circlesPerLayer = 28;
-    const radius = 2;
-    
-    for (let i = 0; i < layers; i++) {
-      const phi = (Math.PI * i) / (layers - 1);
-      const y = radius * Math.cos(phi);
-      const ringRadius = radius * Math.sin(phi);
-      
-      const numCircles = Math.max(4, Math.floor(circlesPerLayer * Math.sin(phi)));
-      
-      for (let j = 0; j < numCircles; j++) {
-        const theta = (2 * Math.PI * j) / numCircles;
-        const x = ringRadius * Math.cos(theta);
-        const z = ringRadius * Math.sin(theta);
-        
-        const pos = new THREE.Vector3(x, y, z);
-        
-        circles.push({
-          position: [x, y, z],
-          rotation: [phi, theta, 0],
-          radius: 0.18,
-          originalPosition: pos.clone(),
-          velocity: pos.clone().normalize().multiplyScalar(2 + Math.random() * 3)
-        });
-      }
-    }
-    
-    return circles;
-  }, []);
-  
   useFrame((state) => {
     if (globeRef.current) {
-      if (!hovered) {
-        globeRef.current.rotation.y = state.clock.getElapsedTime() * 0.3;
-        globeRef.current.rotation.x = Math.sin(state.clock.getElapsedTime() * 0.2) * 0.1;
-        
-        // Reset spheres to original positions when not hovering
-        globeRef.current.children.forEach((child, i) => {
-          const data = circleData[i];
-          child.position.copy(data.originalPosition);
-          child.rotation.set(data.rotation[0], data.rotation[1], data.rotation[2]);
-          
-          const mesh = child.children[0] as THREE.Mesh;
-          if (mesh && mesh.material) {
-            const material = mesh.material as THREE.MeshStandardMaterial;
-            material.opacity = 1;
-          }
-        });
-      }
-      
-      // Smooth scale animation
-      const targetScale = hovered ? 1.15 : 1;
-      scaleRef.current += (targetScale - scaleRef.current) * 0.1;
-      globeRef.current.scale.setScalar(scaleRef.current);
-    }
-    
-    // Explosion animation
-    if (hovered && globeRef.current) {
-      const explosionTime = state.clock.getElapsedTime() % 6;
-      
-      if (explosionTime < 2.5) {
-        // Explode outward
-        globeRef.current.children.forEach((child, i) => {
-          const data = circleData[i];
-          const t = Math.min(explosionTime / 2.5, 1);
-          const easeOut = 1 - Math.pow(1 - t, 3);
-          
-          child.position.lerpVectors(
-            data.originalPosition,
-            data.originalPosition.clone().add(data.velocity.clone().multiplyScalar(easeOut)),
-            t
-          );
-          
-          // Fade out
-          const material = (child as THREE.Mesh).material as THREE.MeshStandardMaterial;
-          if (material) {
-            material.opacity = 1 - easeOut * 0.7;
-          }
-          
-          // Random rotation during explosion
-          child.rotation.x += 0.05;
-          child.rotation.y += 0.03;
-        });
-      } else if (explosionTime < 3) {
-        // Hold dispersed
-        globeRef.current.children.forEach((child) => {
-          const material = (child as THREE.Mesh).material as THREE.MeshStandardMaterial;
-          if (material) {
-            if (material) {
-              material.opacity = 0.3;
-            }
-          }
-        });
-      } else {
-        // Reassemble
-        const reassembleTime = (explosionTime - 3) / 3;
-        const easeIn = reassembleTime * reassembleTime;
-        
-        globeRef.current.children.forEach((child, i) => {
-          const data = circleData[i];
-          const dispersedPos = data.originalPosition.clone().add(data.velocity);
-          
-          child.position.lerpVectors(
-            dispersedPos,
-            data.originalPosition,
-            easeIn
-          );
-          
-          // Fade back in
-          const material = (child as THREE.Mesh).material as THREE.MeshStandardMaterial;
-          if (material) {
-            material.opacity = 0.3 + easeIn * 0.7;
-          }
-        });
-      }
-    }
-  });
-  
-  // Animate glow effect
-  useFrame((state) => {
-    timeRef.current = state.clock.elapsedTime;
-    
-    if (globeRef.current) {
-      globeRef.current.children.forEach((group, i) => {
-        const mesh = group.children[0] as THREE.Mesh;
+      globeRef.current.rotation.y = state.clock.getElapsedTime() * 0.3;
+      globeRef.current.rotation.x = Math.sin(state.clock.getElapsedTime() * 0.2) * 0.1;
+      globeRef.current.children.forEach((child, i) => {
+        const mesh = child.children[0] as THREE.Mesh;
         if (mesh && mesh.material) {
           const material = mesh.material as THREE.MeshStandardMaterial;
-          
-          // Create a wave pattern based on sphere index and time
-          const wave = Math.sin(timeRef.current * 1.5 + i * 0.3) * 0.5 + 0.5;
-          const pulse = Math.sin(timeRef.current * 2 + i * 0.15);
-          
-          // Combine wave and pulse for varied effect
+          material.opacity = 1;
+          // Animate glow effect
+          const wave = Math.sin(state.clock.elapsedTime * 1.5 + i * 0.3) * 0.5 + 0.5;
+          const pulse = Math.sin(state.clock.elapsedTime * 2 + i * 0.15);
           const intensity = wave * 0.4 + pulse * 0.3 + 0.3;
-          
-          // Update emissive intensity with animation continuing during hover
           material.emissiveIntensity = hovered ? intensity + 0.5 : intensity;
         }
       });
+      // Smooth scale animation for globe expansion on hover
+      const targetScale = hovered ? 1.15 : 1;
+      scaleRef.current += (targetScale - scaleRef.current) * 0.1;
+      globeRef.current.scale.setScalar(scaleRef.current);
     }
   });
   
@@ -304,13 +203,10 @@ function GlobeScene() {
   const [hovered, setHovered] = useState(false);
   
   return (
-    <>
-      <HoneycombGlobe 
-        hovered={hovered}
-        onHoverChange={setHovered}
-      />
-      {hovered && <EnergyParticles visible={hovered} />}
-    </>
+    <HoneycombGlobe 
+      hovered={hovered}
+      onHoverChange={setHovered}
+    />
   );
 }
 
