@@ -164,8 +164,6 @@ function SystemCapabilitiesCards() {
 
 // Industry Agent Flip Cards Component
 function IndustryAgentCards() {
-  const [flippedCards, setFlippedCards] = useState<number[]>([]);
-
   const agents = [
     { 
       title: 'Coding Agents', 
@@ -205,81 +203,27 @@ function IndustryAgentCards() {
     }
   ];
 
-  const handleMouseEnter = (index: number) => {
-    setFlippedCards(prev => [...prev, index]);
-  };
-  const handleMouseLeave = (index: number) => {
-    setFlippedCards(prev => prev.filter(i => i !== index));
-  };
-
   return (
     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {agents.map((agent, i) => {
-        const isFlipped = flippedCards.includes(i);
-        
-        return (
-          <div
-            key={i}
-            className="relative h-[200px] cursor-pointer"
-            style={{ perspective: '1000px' }}
-            onMouseEnter={() => handleMouseEnter(i)}
-            onMouseLeave={() => handleMouseLeave(i)}
-          >
-            <motion.div
-              className="relative w-full h-full"
-              animate={{ rotateY: isFlipped ? 180 : 0 }}
-              transition={{ duration: 0.6, type: 'spring', stiffness: 100 }}
-              style={{ transformStyle: 'preserve-3d' }}
-            >
-              {/* Front Face */}
-              <div
-                className="absolute inset-0 group p-6 rounded-xl bg-white border-2 border-gray-200 shadow-lg hover:border-cyan-400 transition-all duration-300"
-                style={{ backfaceVisibility: 'hidden' }}
-              >
-                {/* Glow effect on hover */}
-                <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/0 to-emerald-400/0 group-hover:from-cyan-400/10 group-hover:to-emerald-400/10 rounded-xl transition-all duration-300" />
-                
-                <div className="relative h-full flex flex-col">
-                  <div className="text-4xl mb-4">{agent.icon}</div>
-                  <h3 className="font-semibold text-xl text-gray-900 mb-3">
-                    {agent.title}
-                  </h3>
-                  <p className="text-gray-700 leading-relaxed text-sm">
-                    {agent.desc}
-                  </p>
-                </div>
-              </div>
-
-              {/* Back Face */}
-              <div
-                className="absolute inset-0 p-1 rounded-xl bg-gradient-to-br from-indigo-400 to-purple-400 shadow-lg overflow-hidden"
-                style={{ 
-                  backfaceVisibility: 'hidden',
-                  transform: 'rotateY(180deg)'
-                }}
-              >
-                <div className="relative h-full flex flex-col bg-white rounded-lg overflow-hidden">
-                  <img 
-                    src={agent.image} 
-                    alt={agent.title}
-                    className="absolute inset-0 w-full h-full object-cover rounded-lg"
-                  />
-                      <div className="absolute inset-0 rounded-lg" style={{ backgroundColor: '#06b6d4', opacity: 0.4 }} />
-                  <div className="relative z-10 h-full flex flex-col items-center justify-center text-center text-white p-6">
-                    <div className="text-5xl mb-3 drop-shadow-lg">{agent.icon}</div>
-                    <h3 className="font-bold text-xl mb-2 drop-shadow-md">
-                      {agent.title}
-                    </h3>
-                    <p className="text-xs font-light drop-shadow">
-                      Industry-optimized AI agents
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
+      {agents.map((agent, i) => (
+        <div
+          key={i}
+          className="bg-white border-2 border-gray-200 rounded-xl shadow-lg overflow-hidden"
+        >
+          <div className="w-full h-[120px]">
+            <img
+              src={agent.image}
+              alt={agent.title}
+              className="w-full h-full object-cover"
+              style={{ objectPosition: 'center' }}
+            />
           </div>
-        );
-      })}
+          <div className="text-center px-4 py-4">
+            <h3 className="font-bold text-lg text-gray-900 mb-1">{agent.title}</h3>
+            <p className="text-gray-700 text-sm">Industry-optimized AI agents</p>
+          </div>
+        </div>
+      ))}
     </div>
   );
 }
