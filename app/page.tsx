@@ -91,14 +91,14 @@ function SystemCapabilitiesCards() {
   };
 
   return (
-    <div className="grid md:grid-cols-3 gap-6">
+    <div className="grid md:grid-cols-3 gap-4">
       {capabilities.map((capability, i) => {
         const isFlipped = flippedCards.includes(i);
         
         return (
           <div
             key={i}
-            className="relative h-[280px] cursor-pointer"
+            className="relative h-[170px] cursor-pointer"
             style={{ perspective: '1000px' }}
             onMouseEnter={() => handleMouseEnter(i)}
             onMouseLeave={() => handleMouseLeave(i)}
@@ -111,18 +111,18 @@ function SystemCapabilitiesCards() {
             >
               {/* Front Face */}
               <div
-                className="absolute inset-0 group p-6 rounded-xl bg-white border-2 border-gray-200 shadow-lg hover:border-cyan-400 transition-all duration-300"
+                className="absolute inset-0 group p-3 rounded-lg bg-white border-2 border-gray-200 shadow-lg hover:border-cyan-400 transition-all duration-300"
                 style={{ backfaceVisibility: 'hidden' }}
               >
                 {/* Glow effect on hover */}
-                <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/0 to-emerald-400/0 group-hover:from-cyan-400/10 group-hover:to-emerald-400/10 rounded-xl transition-all duration-300" />
+                <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/0 to-emerald-400/0 group-hover:from-cyan-400/10 group-hover:to-emerald-400/10 rounded-lg transition-all duration-300" />
                 
                 <div className="relative h-full flex flex-col">
-                  <div className="text-4xl mb-4">{capability.icon}</div>
-                  <h4 className="font-bold text-xl text-gray-900 mb-3">
+                  <div className="text-2xl mb-2">{capability.icon}</div>
+                  <h4 className="font-bold text-base text-gray-900 mb-2">
                     {capability.title}
                   </h4>
-                  <p className="text-gray-700 leading-relaxed text-sm">
+                  <p className="text-gray-700 leading-relaxed text-xs">
                     {capability.desc}
                   </p>
                 </div>
@@ -213,14 +213,14 @@ function IndustryAgentCards() {
   };
 
   return (
-    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
       {agents.map((agent, i) => {
         const isFlipped = flippedCards.includes(i);
         
         return (
           <div
             key={i}
-            className="relative h-[200px] cursor-pointer"
+            className="relative h-[150px] cursor-pointer"
             style={{ perspective: '1000px' }}
             onMouseEnter={() => handleMouseEnter(i)}
             onMouseLeave={() => handleMouseLeave(i)}
@@ -233,15 +233,15 @@ function IndustryAgentCards() {
             >
               {/* Front Face */}
               <div
-                className="absolute inset-0 group p-6 rounded-xl bg-white border-2 border-gray-200 shadow-lg hover:border-cyan-400 transition-all duration-300"
+                className="absolute inset-0 group p-3 rounded-lg bg-white border-2 border-gray-200 shadow-lg hover:border-cyan-400 transition-all duration-300"
                 style={{ backfaceVisibility: 'hidden' }}
               >
                 {/* Glow effect on hover */}
-                <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/0 to-emerald-400/0 group-hover:from-cyan-400/10 group-hover:to-emerald-400/10 rounded-xl transition-all duration-300" />
+                <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/0 to-emerald-400/0 group-hover:from-cyan-400/10 group-hover:to-emerald-400/10 rounded-lg transition-all duration-300" />
                 
                 <div className="relative h-full flex flex-col">
-                  <div className="text-4xl mb-4">{agent.icon}</div>
-                  <h3 className="font-semibold text-xl text-gray-900 mb-3">
+                  <div className="text-2xl mb-2">{agent.icon}</div>
+                  <h3 className="font-semibold text-base text-gray-900 mb-2">
                     {agent.title}
                   </h3>
                   <p className="text-gray-700 leading-relaxed text-sm">
@@ -329,15 +329,14 @@ function WorkflowPipelineCards() {
   };
 
   return (
-    <div className="flex flex-col md:flex-row items-center gap-2 md:gap-3 relative">
-      
+    <div className="flex flex-col md:flex-row items-center gap-1 md:gap-2 relative">
       {steps.map((step, i) => {
         const isFlipped = flippedCards.includes(i);
         
         return (
           <React.Fragment key={i}>
             <div
-              className="relative flex-1 w-full md:w-auto h-[220px] cursor-pointer"
+              className="relative flex-1 w-full md:w-auto h-[150px] cursor-pointer"
               style={{ perspective: '1000px' }}
               onMouseEnter={() => handleMouseEnter(i)}
               onMouseLeave={() => handleMouseLeave(i)}
@@ -350,22 +349,22 @@ function WorkflowPipelineCards() {
               >
               {/* Front Face */}
               <div
-                className="absolute inset-0 group bg-white border-2 border-gray-200 rounded-xl p-6 shadow-lg hover:border-cyan-400 transition-all duration-300"
+                className="absolute inset-0 group bg-white border-2 border-gray-200 rounded-lg p-3 shadow-lg hover:border-cyan-400 transition-all duration-300"
                 style={{ backfaceVisibility: 'hidden' }}
               >
                 {/* Glow effect on hover */}
-                <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/0 to-emerald-400/0 group-hover:from-cyan-400/10 group-hover:to-emerald-400/10 rounded-xl transition-all duration-300" />
+                <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/0 to-emerald-400/0 group-hover:from-cyan-400/10 group-hover:to-emerald-400/10 rounded-lg transition-all duration-300" />
                 
                 <div className="relative flex flex-col items-center text-center h-full">
                   {/* Step Number Badge */}
-                  <div className="mb-2 px-3 py-1 rounded-full bg-cyan-100 text-cyan-700 text-xs font-semibold">
+                  <div className="mb-1 px-2 py-0.5 rounded-full bg-cyan-100 text-cyan-700 text-[10px] font-semibold">
                     Step {i + 1}
                   </div>
-                  <div className="text-4xl mb-3 text-gray-900">{step.icon}</div>
-                  <h3 className="font-bold text-lg text-gray-900 mb-2">
+                  <div className="text-2xl mb-1 text-gray-900">{step.icon}</div>
+                  <h3 className="font-bold text-base text-gray-900 mb-1">
                     {step.title}
                   </h3>
-                  <p className="text-sm text-gray-700 leading-relaxed">
+                  <p className="text-xs text-gray-700 leading-relaxed">
                     {step.desc}
                   </p>
                 </div>
